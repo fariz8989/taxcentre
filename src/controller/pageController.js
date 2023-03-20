@@ -19,7 +19,59 @@ function HomePage() {
       <Partner />
       <div id="latest-news-carousel" className="">
         <h1 className="news-header">Latest News</h1>
-        <LatestCarousel />
+        <div className="news-homepage">
+              {/* 1  */}
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+                <img
+                  className=" h-1/2 w-full object-cover "
+                  src={require("../assets/training.webp")}
+                  alt=""
+                />
+                <div className="news-text">
+                  <span> 10 November 2022</span>
+                  <h1 className="">Lorem Ipsum</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
+                    sagittis condimentum nec quis velit.
+                  </p>
+                </div>
+              </div>
+              {/* 2 */}
+              <div className=" grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+                <img
+                  className=" h-1/2 w-full object-cover "
+                  src={require("../assets/training.webp")}
+                  alt=""
+                />
+                <div className="news-text">
+                  <span> 10 November 2022</span>
+                  <h1 className="">Lorem Ipsum</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
+                    sagittis condimentum nec quis velit.
+                  </p>
+                </div>
+              </div>
+              {/*  3 */}
+              <div className=" grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+                <img
+                  className=" h-1/2 w-full object-cover "
+                  src={require("../assets/training.webp")}
+                  alt=""
+                />
+                <div className="news-text">
+                  <span> 10 November 2022</span>
+                  <h1 className="">Lorem Ipsum</h1>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
+                    sagittis condimentum nec quis velit.
+                  </p>
+                </div>
+              </div>
+            </div>
       </div>
       <Survey/>
       <Activity />

@@ -171,30 +171,32 @@ button:disabled {
   left: 50%;
   transform: translateX(-50%);
 }
-#activity button:nth-child(3),#survey .survey-button:nth-child(3){
+#activity button:nth-child(3),
+#survey .survey-button:nth-child(3) {
   position: absolute;
   transform: translateY(-50%);
   left: 2%;
   top: 50%;
 }
-#activity button:nth-child(4),#survey .survey-button:nth-child(4){
+#activity button:nth-child(4),
+#survey .survey-button:nth-child(4) {
   position: absolute;
   transform: translateY(-50%);
   right: 2%;
   top: 50%;
 }
-#activity button, .survey-button {
-  width: 48px;
-  height: 48px;
-  padding: 12px;
+#activity button,
+.survey-button {
+  display: none;
   background-color: var(--darkgray);
   transition: all 0.2s ease-in;
 }
-#activity button:hover{
+#activity button:hover {
   background-color: var(--lightgray);
 }
 
-#activity button svg, #survey .survey-button svg{
+#activity button svg,
+#survey .survey-button svg {
   fill: var(--yellow);
 }
 .activity-container {
@@ -205,25 +207,25 @@ button:disabled {
 .activity-slider {
   display: flex;
   gap: 12px;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-behavior: smooth;
   transition: all 0.5s ease-in;
 }
-.activity-slider img{
+.activity-slider img {
   height: 100%;
   width: 100%;
   border-radius: 8px;
   opacity: 0.7;
   border-radius: 8px;
 }
-.activity-slider .activity-item{
+.activity-slider .activity-item {
   position: relative;
   background-color: var(--darkgray);
   min-width: 284px;
   min-height: 200px;
   border-radius: 8px;
 }
-.activity-item div{
+.activity-item div {
   width: 100%;
   height: 100%;
   top: 0;
@@ -233,18 +235,18 @@ button:disabled {
   align-items: end;
   padding: 24px;
 }
-.activity-item h3{
-  font-family: 'Roboto',sans-serif;
+.activity-item h3 {
+  font-family: "Roboto", sans-serif;
   color: var(--lightgray);
   font-size: 16px;
 }
 /* Survey */
-#survey{
+#survey {
   background-color: var(--darkgray);
   padding: 24px 36px;
   position: relative;
 }
-#survey h1{
+#survey h1 {
   font-family: "Montserrat", sans-serif;
   font-size: 36px;
   color: var(--lightgray);
@@ -252,7 +254,7 @@ button:disabled {
   display: inline-block;
   position: relative;
 }
-#survey h1::after{
+#survey h1::after {
   content: "";
   height: 5px;
   width: 50%;
@@ -261,36 +263,35 @@ button:disabled {
   bottom: 0px;
   left: 0%;
 }
-.survey-container{
+.survey-container {
   display: flex;
   gap: 12px;
   padding: 24px;
-  overflow-x: hidden;
+  overflow-x: scroll;
   scroll-behavior: smooth;
 }
-
-div.survey-card{
+div.survey-card {
   width: 25%;
-  min-width: 320px;
+  min-width: 280px;
   background-color: var(--lightgray);
   border-radius: 8px;
   padding: 24px 24px 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
-.survey-card h3{
+.survey-card h3 {
   font-size: 24px;
   font-weight: bold;
   color: var(--darkgray);
 }
-.survey-card p{
+.survey-card p {
   color: var(--midgray);
   font-size: 14px;
 }
-#survey .survey-button{
+#survey .survey-button {
   background-color: var(--midgray);
 }
-#survey .survey-button:hover{
-  background-color: var(--white)
+#survey .survey-button:hover {
+  background-color: var(--white);
 }
 /* Latest News */
 #latest-news-carousel {
@@ -313,11 +314,14 @@ div.survey-card{
 .news-header {
   color: var(--white);
   font-family: "Montserrat", sans-serif;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
   text-align: center;
   display: inline-block;
   position: relative;
+}
+.news-section-two .news-header {
+  font-size: 28px;
 }
 .news-header::after {
   content: "";
@@ -396,7 +400,7 @@ div.survey-card{
   color: var(--darkgray);
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 36px;
   display: inline-block;
   position: relative;
 }
@@ -426,6 +430,17 @@ div.survey-card{
 }
 .partner-wrapper img:hover {
   opacity: 1;
+}
+.news-homepage {
+  display: flex;
+  gap: 24px;
+  padding: 24px 48px;
+  height: 70vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.news-homepage .grid-item {
+  min-width: 250px;
 }
 /* Training Page */
 #training {
@@ -623,13 +638,12 @@ div.survey-card{
   list-style: inside decimal;
 }
 /* Publication */
-#publication{
+#publication {
   padding: 48px;
   background-color: #cfd1d2;
-  font-family: 'Montserrat',sans-serif;
-
+  font-family: "Montserrat", sans-serif;
 }
-#publication h1{
+#publication h1 {
   color: var(--darkgray);
   font-weight: bold;
   font-size: 36px;
@@ -644,39 +658,36 @@ div.survey-card{
   bottom: -2px;
   left: 0;
 }
-#publication .publication-container{
+#publication .publication-container {
   padding: 24px 0;
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 }
-#publication .publication-card{
+#publication .publication-card {
   height: fit-content;
   background-color: var(--white);
   border-radius: 8px;
   overflow: hidden;
   min-height: 320px;
 }
-#publication .publication-text{
+#publication .publication-text {
   padding: 12px 24px 0;
 }
-.publication-text h3{
+.publication-text h3 {
   font-size: 22px;
   text-transform: uppercase;
   font-weight: bold;
 }
-.publication-text p{
-  font-family: 'Roboto', sans-serif;
+.publication-text p {
+  font-family: "Roboto", sans-serif;
   color: var(--midgray);
-
 }
-#publication .publication-image{
+#publication .publication-image {
   width: 100%;
   height: 50%;
   object-fit: cover;
 }
-
-
 
 /* News Page */
 #news {
@@ -763,6 +774,7 @@ div.survey-card{
 #news .carousel-text span {
   font-weight: normal;
 }
+
 .news-section-two .news-header::after {
   content: "";
   height: 6px;
@@ -806,7 +818,7 @@ div.survey-card{
   text-align: justify;
   margin-top: 12px;
   font-family: "Roboto", sans-serif;
-  font-size:  18px;
+  font-size: 18px;
   color: var(--lightgray);
 }
 #vision-mission h1::after {
@@ -938,7 +950,7 @@ div.survey-card{
   background-color: #d9dbdb;
 }
 #news-display .news-wrapper:nth-child(1) {
-  width: 70%;
+  width: 100%;
   padding: 24px 46px;
 }
 #news-display .news-wrapper div:nth-child(1) {
@@ -956,13 +968,13 @@ div.survey-card{
   margin: 24px 0;
 }
 #news-display .news-display-text h1 {
-  font-size: 36px;
+  font-size: 24px;
   font-family: "Roboto", sans-serif;
   color: var(--darkgray);
   font-weight: bold;
 }
 .news-display-text span {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--midgray);
   font-family: "Roboto", sans-serif;
 }
@@ -973,7 +985,7 @@ div.survey-card{
   padding: 8px 0;
 }
 .news-information span {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--darkgray);
 }
 .news-information svg {
@@ -1060,19 +1072,19 @@ div.survey-card{
   padding: 12px 24px;
   @apply gap-4;
 }
-.right-footer span{
+.right-footer span {
   font-weight: unset;
   font-size: 16px;
   color: var(--midgray);
 }
-.right-footer h4{
-  font-family: 'Roboto', sans-serif;
+.right-footer h4 {
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: bold;
   color: var(--darkgray);
 }
-.right-footer div{
-text-align: center;
+.right-footer div {
+  text-align: center;
 }
 .footer-contact {
   display: flex;
@@ -1170,7 +1182,9 @@ text-align: center;
     font-weight: 700;
     font-size: 24px;
   }
-
+  .news-text p {
+    font-size: 16px;
+  }
   .carousel-image {
     width: 100%;
     height: 100%;
@@ -1224,7 +1238,7 @@ text-align: center;
   .carousel-grid .grid-item:nth-child(2) {
     display: unset;
   }
-  
+
   .button {
     @apply px-6 py-2;
     height: fit-content;
@@ -1278,14 +1292,26 @@ text-align: center;
   .partner-wrapper:nth-child(1) {
     border-right: solid 4px var(--midgray);
   }
+  .survey-container {
+    overflow-x: hidden;
+  }
+  .news-homepage {
+    display: flex;
+    gap: 24px;
+    padding: 24px 48px;
+    height: 70vh;
+    overflow-x: hidden;
+  }
   #activity h1 {
     font-weight: 700;
     font-size: 48px;
   }
-  #activity button,#survey .survey-button {
+  #activity button,
+  #survey .survey-button {
     width: 64px;
     height: 64px;
     padding: 16px;
+    display: block;
   }
   .activity-container {
     padding: 0 48px;
@@ -1300,7 +1326,7 @@ text-align: center;
     min-width: 470px;
     min-height: 320px;
   }
-  .activity-item h3{
+  .activity-item h3 {
     font-size: 18px;
   }
   #training {
@@ -1315,7 +1341,7 @@ text-align: center;
   #register-form {
     padding: 64px;
   }
-  #register-form .form-container{
+  #register-form .form-container {
     flex-direction: row;
   }
   #register-form .form-wrapper {
@@ -1333,6 +1359,9 @@ text-align: center;
   .news-section-two .news-header::after {
     bottom: 12px;
   }
+  .news-section-two .news-header {
+    font-size: 48px;
+  }
   .news-section-two {
     @apply bg-gray-800 p-12;
   }
@@ -1340,6 +1369,19 @@ text-align: center;
     display: flex;
     gap: 24px;
     padding: 12px;
+  }
+  #news-display .news-wrapper:nth-child(1) {
+    width: 70%;
+    padding: 24px 46px;
+  }
+  #news-display .news-display-text h1 {
+    font-size: 36px;
+  }
+  .news-display-text span {
+    font-size: 18px;
+  }
+  .news-information span {
+    font-size: 16px;
   }
   #training-display {
     padding: 48px;
@@ -1434,7 +1476,7 @@ text-align: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: unset;
   }
-  .left-footer{
+  .left-footer {
     border-right: solid 3px #505050;
   }
   .left-footer p {
@@ -1486,7 +1528,7 @@ text-align: center;
   }
   #team {
     flex-direction: row;
-    padding:48px 72px;
+    padding: 48px 72px;
   }
   #carousel-team .carousel-item {
     height: 80vh;
