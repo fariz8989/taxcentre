@@ -15,7 +15,7 @@ export default function LatestCarousel() {
           <div className="carousel-item">
             <div className="carousel-grid">
               {/* 1  */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -27,14 +27,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/* 2 */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className=" grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -46,14 +44,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/*  3 */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className=" grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -65,9 +61,7 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
@@ -76,7 +70,7 @@ export default function LatestCarousel() {
           <div className="carousel-item">
             <div className="carousel-grid">
               {/* 1  */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -88,13 +82,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/* 2 */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -106,13 +99,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/*  3 */}
-              <div className=" h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className=" grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -124,8 +116,7 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
@@ -134,7 +125,7 @@ export default function LatestCarousel() {
           <div className="carousel-item">
             <div className="carousel-grid">
               {/* 1  */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -146,14 +137,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/* 2 */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -165,14 +154,12 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>
               {/*  3 */}
-              <div className="h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
                 <img
                   className=" h-1/2 w-full object-cover "
                   src={require("../../assets/training.webp")}
@@ -184,9 +171,7 @@ export default function LatestCarousel() {
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Proin egestas mollis tincidunt. Quisque at nunc sit amet mi
-                    sagittis condimentum nec quis velit. Suspendisse et felis
-                    sodales, sodales velit porttitor, lobortis nibh. Proin id
-                    nibh in dui laoreet ornare at ac orci.
+                    sagittis condimentum nec quis velit.
                   </p>
                 </div>
               </div>

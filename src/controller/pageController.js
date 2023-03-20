@@ -74,7 +74,9 @@ function AboutPage() {
             <h1>Our Mission</h1>
             <ol>
               <li>Meningkatkan penelitian untuk mengembangkan ilmu pengetahuan dalam menghadapi perubahan masyarakat secara global dengan tujuan dapat menjadi sarana pemecahan masalah dan peningkatan kualitas pengetahuan bagi bangsa Indonesia, serta manusia pada umumnya, sebagai bentuk dari perwujudan ilmu pengetahuan dan profesi perpajakan </li>
+              <br/>
               <li>Membuat Strategy Management yang andal untuk mempercepat dan tepat dalam pencapaian visi dimasing-masing lini dan ditingkat pusat </li>
+              <br/>
               <li>Membangun market leader untuk membantu pencapaian peningkatan penelitian dan strategy management dengan cepat</li>
             </ol>
           </div>

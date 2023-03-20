@@ -35,7 +35,7 @@ export default function Activity() {
           </div>
         </div>
         <button
-          onClick={() => (slider.current.scrollLeft -= 500)}
+          onClick={() => (slider.current.scrollLeft -= 300)}
           type="button"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -43,7 +43,7 @@ export default function Activity() {
           </svg>
         </button>
         <button
-          onClick={() => (slider.current.scrollLeft += 500)}
+          onClick={() => (slider.current.scrollLeft += 300)}
           type="button"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

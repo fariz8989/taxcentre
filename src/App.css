@@ -199,7 +199,7 @@ button:disabled {
 }
 .activity-container {
   margin: 24px 0;
-  padding: 0 48px;
+  padding: 0 24px;
   height: 50%;
 }
 .activity-slider {
@@ -300,17 +300,20 @@ div.survey-card{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 36px;
   @apply gap-8;
 }
-.carousel-grid div:nth-child(3) {
+.carousel-grid .grid-item:nth-child(3) {
+  display: none;
+}
+.carousel-grid .grid-item:nth-child(2) {
   display: none;
 }
 .news-header {
   color: var(--white);
   font-family: "Montserrat", sans-serif;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 700;
   text-align: center;
   display: inline-block;
@@ -553,7 +556,7 @@ div.survey-card{
   transition: max-height 0.5s ease-in-out;
 }
 #training-display .open {
-  max-height: 190px;
+  max-height: 232px;
 }
 #training-display .button-open {
   transform: rotateX(180deg);
@@ -568,7 +571,7 @@ div.survey-card{
 /* Register Form */
 #register-form {
   background-color: #cfd1d2;
-  padding: 64px;
+  padding: 36px;
   font-family: "PT Sans", sans-serif;
   color: var(--darkgray);
 }
@@ -580,9 +583,10 @@ div.survey-card{
 #register-form .form-container {
   display: flex;
   margin: 24px 0;
+  flex-direction: column;
 }
 #register-form .form-wrapper {
-  width: 50%;
+  width: 100%;
 }
 #register-form span {
   font-weight: bold;
@@ -683,7 +687,7 @@ div.survey-card{
   background: var(--lightgray);
   display: flex;
   flex-direction: column;
-  padding: 48px;
+  padding: 48px 24px;
   gap: 24px;
 }
 .news-section-one .carousel-item {
@@ -776,7 +780,7 @@ div.survey-card{
 #vision-mission {
   width: 100%;
   @apply bg-gray-800;
-  padding: 72px;
+  padding: 36px 72px;
 }
 .vision {
   width: 100%;
@@ -784,7 +788,7 @@ div.survey-card{
 }
 #vision-mission h1 {
   font-family: "Montserrat", sans-serif;
-  font-size: 54px;
+  font-size: 48px;
   color: var(--lightgray);
   font-weight: 700;
   display: inline-block;
@@ -794,7 +798,7 @@ div.survey-card{
   text-align: justify;
   margin-top: 12px;
   font-family: "Roboto", sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   color: var(--lightgray);
 }
 #vision-mission ol {
@@ -802,7 +806,7 @@ div.survey-card{
   text-align: justify;
   margin-top: 12px;
   font-family: "Roboto", sans-serif;
-  font-size: 22px;
+  font-size:  18px;
   color: var(--lightgray);
 }
 #vision-mission h1::after {
@@ -847,7 +851,7 @@ div.survey-card{
   font-size: 16px;
 }
 #team {
-  padding: 60px 72px;
+  padding: 24px 72px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -864,7 +868,7 @@ div.survey-card{
   height: 100%;
 }
 .team-container h1 {
-  font-size: 48px;
+  font-size: 36px;
   text-align: center;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
@@ -885,7 +889,7 @@ div.survey-card{
 }
 .team-container p {
   font-family: "Roboto", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--darkgray);
   font-weight: 500;
 }
@@ -1022,7 +1026,6 @@ div.survey-card{
   flex-direction: column;
   padding: 0 16px;
   @apply gap-8;
-  border-right: solid 3px #505050;
   justify-content: center;
   align-items: center;
 }
@@ -1048,13 +1051,13 @@ div.survey-card{
   align-items: center;
   padding: 0 24px;
   font-size: 16px;
-  border-right: solid 3px #505050;
   @apply gap-6;
 }
 .right-footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 12px 24px;
   @apply gap-4;
 }
 .right-footer span{
@@ -1064,11 +1067,13 @@ div.survey-card{
 }
 .right-footer h4{
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: var(--darkgray);
 }
-
+.right-footer div{
+text-align: center;
+}
 .footer-contact {
   display: flex;
   @apply gap-4;
@@ -1213,9 +1218,13 @@ div.survey-card{
     padding: 60px;
     @apply gap-8;
   }
-  .carousel-grid div:nth-child(3) {
+  .carousel-grid .grid-item:nth-child(3) {
     display: unset;
   }
+  .carousel-grid .grid-item:nth-child(2) {
+    display: unset;
+  }
+  
   .button {
     @apply px-6 py-2;
     height: fit-content;
@@ -1279,7 +1288,6 @@ div.survey-card{
     padding: 16px;
   }
   .activity-container {
-    margin: 24px 0;
     padding: 0 48px;
     height: unset;
   }
@@ -1303,6 +1311,15 @@ div.survey-card{
   }
   .training-text:hover {
     font-size: 60px;
+  }
+  #register-form {
+    padding: 64px;
+  }
+  #register-form .form-container{
+    flex-direction: row;
+  }
+  #register-form .form-wrapper {
+    width: 50%;
   }
   .news-section-one {
     flex-direction: row;
@@ -1417,11 +1434,15 @@ div.survey-card{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: unset;
   }
+  .left-footer{
+    border-right: solid 3px #505050;
+  }
   .left-footer p {
     font-size: 18px;
   }
   .mid-footer {
     align-items: start;
+    border-right: solid 3px #505050;
   }
   #vision-mission {
     padding: 72px;
@@ -1465,6 +1486,7 @@ div.survey-card{
   }
   #team {
     flex-direction: row;
+    padding:48px 72px;
   }
   #carousel-team .carousel-item {
     height: 80vh;
