@@ -31,25 +31,24 @@ button:disabled {
   background-color: unset !important;
   color: unset !important;
 }
+.main-container {
+  margin-top: 73px;
+}
 .navbar {
+  width: 100%;
   background-color: var(--white);
   position: fixed;
   z-index: 16;
   top: 0;
   left: 0;
-  height: 100%;
-  padding: 20px 24px 0;
-  translate: -100% 0;
+  height: fit-content;
+  padding: 12px 24px 0;
   display: flex;
   gap: 10px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  visibility: hidden;
-  transition-property: translate, opacity, visibility;
-  transition-duration: 0.5s;
 }
 
 .navbar nav {
@@ -78,20 +77,26 @@ button:disabled {
 .logo {
   width: 160px;
 }
-.nav-link {
+.navbar .nav-link {
   flex-direction: column;
-  @apply flex gap-5 font-semibold text-gray-500 mt-3;
+  @apply gap-5 font-semibold text-gray-500 mt-3;
   font-size: 14px;
+  display: flex;
+  transition-property: translate, opacity, visibility, max-height;
+  transition-duration: 0.5s;
+  max-height: 0;
+  overflow: hidden;
+  /*   translate: -100% 0;  */
+}
+.nav-link a:last-child {
+  margin-bottom: 12px;
 }
 .nav-item {
   color: var(--darkgray);
   transition: all 0.25s ease-in;
 }
-#main-nav.open .navbar {
-  opacity: 1;
-  visibility: visible;
-  translate: 0 0;
-  width: 100%;
+#main-nav .navbar .nav-link.open {
+  max-height: 280px !important;
 }
 #submenu {
   display: none;
@@ -134,12 +139,12 @@ button:disabled {
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   color: #cfd1d2;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
 }
 .carousel-title {
   font-family: "Montserrat", sans-serif;
-  font-size: 48px;
+  font-size: 42px;
   color: var(--white);
   font-weight: 700;
   text-align: center;
@@ -277,11 +282,17 @@ div.survey-card {
   border-radius: 8px;
   padding: 24px 24px 0;
   font-family: "Roboto", sans-serif;
+  position: relative;
 }
 .survey-card h3 {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: bold;
   color: var(--darkgray);
+  margin-bottom: 80px; /* Fix Survey Button Position Overlap With H3 */
+}
+.survey-card button {
+  position: absolute;
+  bottom: 0;
 }
 .survey-card p {
   color: var(--midgray);
@@ -353,6 +364,10 @@ div.survey-card {
 }
 .news-text p {
   font-size: 12px;
+  color: black !important;
+}
+.news-text p:hover {
+  color: black !important;
 }
 .button {
   @apply px-4 py-2;
@@ -360,7 +375,7 @@ div.survey-card {
   width: fit-content;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 12px;
   transition: all 0.4s ease-out;
 }
 .button-secondary {
@@ -496,7 +511,7 @@ div.survey-card {
   font-size: 48px;
 }
 #training-display {
-  padding: 48px;
+  padding: 24px;
   display: grid;
   grid-template-columns: 1fr;
   background-color: #cfd1d2;
@@ -515,14 +530,87 @@ div.survey-card {
 #training-display .content-wrapper h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  font-size: 48px;
+  font-size: 36px;
   color: var(--darkgray);
 }
 #training-display .content-wrapper h3 {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 18px;
   color: var(--darkgray);
+}
+#seminar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 36px 24px;
+  background-color: #d9dbdb;
+}
+#seminar h1 {
+  font-size: 36px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: var(--darkgray);
+  position: relative;
+}
+#seminar h1::after {
+  content: "";
+  height: 5px;
+  width: 50%;
+  background-color: var(--yellow);
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#seminar .seminar-container {
+  width: 100%;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(1, 1fr);
+  /*    */
+  margin: 24px 0;
+}
+#seminar .seminar-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background-color: var(--white);
+  height: 400px;
+  position: relative;
+}
+#seminar .seminar-image {
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
+#seminar .seminar-text {
+  padding: 24px;
+}
+#seminar .seminar-text h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+#seminar .seminar-info {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  fill: var(--midgray);
+  color: var(--midgray);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+#seminar .seminar-info div {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+#seminar .seminar-info span {
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+}
+#seminar .seminar-info svg {
+  width: 16px;
 }
 #training-display .content-wrapper li {
   list-style: inside lower-alpha;
@@ -584,58 +672,166 @@ div.survey-card {
   font-family: "Roboto", sans-serif;
 }
 /* Register Form */
-#register-form {
+#training-form {
   background-color: #cfd1d2;
   padding: 36px;
   font-family: "PT Sans", sans-serif;
   color: var(--darkgray);
 }
-#register-form h1 {
+#training-form .Toastify {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 12px !important;
+}
+#training-form h1 {
   font-size: 36px;
   font-weight: bold;
   color: var(--midgray);
 }
-#register-form .form-container {
+#training-form .form-container {
   display: flex;
   margin: 24px 0;
   flex-direction: column;
 }
-#register-form .form-wrapper {
+#training-form .form-wrapper {
   width: 100%;
 }
-#register-form span {
+#training-form span {
   font-weight: bold;
 }
-#register-form .declaration span {
+#training-form .declaration span {
   font-size: 16px;
 }
-#register-form input {
+#training-form input,
+#login-form input {
   display: block;
   background-color: transparent;
   border-bottom: solid 2px var(--midgray);
   margin: 12px 0;
   width: 80%;
 }
-#register-form input[type="checkbox"] {
+#training-form input[type="checkbox"] {
   display: unset;
   width: unset;
   margin: 0 12px;
 }
-#register-form input:focus-visible {
+#training-form input:focus-visible {
   outline: none;
 }
-#register-form .declaration {
+#training-form .declaration {
   width: 100%;
   background-color: rgba(255, 0, 0, 0.274);
   border-radius: 8px;
   padding: 24px;
 }
-#register-form .declaration h3 {
+#training-form .declaration h3 {
   font-weight: bold;
   font-size: 18px;
 }
+.participant-data-alert {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0px !important;
+  right: 0 !important;
+}
 .declaration li {
   list-style: inside decimal;
+}
+#login-form {
+  width: 100%;
+  height: 80vh;
+  background-color: var(--darkgray);
+  padding: 64px;
+}
+.login-wrapper {
+  display: flex;
+  height: 100%;
+  background-color: var(--lightgray);
+  border-radius: 8px;
+}
+.login-image {
+  width: 50%;
+  background-color: var(--darkgray);
+  position: relative;
+  color: var(--lightgray);
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+.login-image div:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  background-image: url("./assets//about-us.jpeg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.5;
+}
+.login-image div:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 48px 36px;
+}
+.login-image div:nth-child(2) h2 {
+  font-size: 48px;
+  opacity: 0.8;
+}
+.login-image div:nth-child(2) h1 {
+  font-size: 64px;
+}
+.login-input {
+  padding: 36px;
+  width: 50%;
+  text-align: center;
+}
+.login-input h1 {
+  font-size: 36px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: var(--midgray);
+}
+.login-input-wrapper {
+  text-align: left;
+  width: 100%;
+}
+#login-form input {
+  width: 100% !important;
+}
+/* LOADING */
+#Loading {
+  opacity: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  grid-column-start: 1;
+  grid-column-end: 5;
+  color: var(--darkgray);
+  font-weight: bold;
+  font-size: 36px !important;
+  position: relative;
+  width: fit-content;
+}
+#Loading::after {
+  animation: loadingMovement 2s infinite;
+  content: "";
+  height: 5px !important;
+  width: 30% !important;
+  background-color: var(--yellow);
+  position: absolute;
+  bottom: -2px !important;
+  left: 0;
+}
+@keyframes loadingMovement {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: 80%;
+  }
+  100% {
+    left: 0;
+  }
 }
 /* Publication */
 #publication {
@@ -648,11 +844,12 @@ div.survey-card {
   font-weight: bold;
   font-size: 36px;
   position: relative;
+  width: fit-content;
 }
 #publication h1::after {
   content: "";
   height: 5px;
-  width: 10%;
+  width: 30%;
   background-color: var(--yellow);
   position: absolute;
   bottom: -2px;
@@ -661,7 +858,7 @@ div.survey-card {
 #publication .publication-container {
   padding: 24px 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 18px;
 }
 #publication .publication-card {
@@ -669,13 +866,19 @@ div.survey-card {
   background-color: var(--white);
   border-radius: 8px;
   overflow: hidden;
-  min-height: 320px;
+  position: relative;
+}
+#publication .publication-card button {
+  position: absolute;
+  bottom: 0;
+  margin: 24px;
 }
 #publication .publication-text {
   padding: 12px 24px 0;
 }
 .publication-text h3 {
-  font-size: 22px;
+  margin-bottom: 74px;
+  font-size: 16px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -688,7 +891,10 @@ div.survey-card {
   height: 50%;
   object-fit: cover;
 }
-
+#publication .css-1oj2twp-MuiPagination-root {
+  display: flex;
+  justify-content: center;
+}
 /* News Page */
 #news {
   width: 100%;
@@ -792,7 +998,7 @@ div.survey-card {
 #vision-mission {
   width: 100%;
   @apply bg-gray-800;
-  padding: 36px 72px;
+  padding: 36px;
 }
 .vision {
   width: 100%;
@@ -863,7 +1069,7 @@ div.survey-card {
   font-size: 16px;
 }
 #team {
-  padding: 24px 72px;
+  padding: 36px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -935,12 +1141,12 @@ div.survey-card {
 }
 .team-name h2 {
   color: var(--lightgray);
-  font-size: 32px;
+  font-size: 18px;
   font-weight: 700;
 }
 .team-name span {
   color: var(--lightgray);
-  font-size: 18px;
+  font-size: 16px;
 }
 /* News Display */
 #news-display {
@@ -1014,13 +1220,13 @@ div.survey-card {
 .share-container svg {
   width: 36px;
 }
-.share-container svg:nth-child(1) {
+.share-container a:nth-child(1) svg {
   fill: #4267b2;
 }
-.share-container svg:nth-child(2) {
+.share-container a:nth-child(2) svg {
   fill: #25d366;
 }
-.share-container svg:nth-child(3) {
+.share-container a:nth-child(3) svg {
   fill: #0e76a8;
 }
 
@@ -1100,6 +1306,7 @@ div.survey-card {
   }
   .main-container {
     transform: translateY(90px);
+    margin-top: unset;
   }
   .navbar {
     opacity: 1;
@@ -1116,10 +1323,15 @@ div.survey-card {
   .logo {
     width: 200px;
   }
-  .nav-link {
+  .navbar .nav-link {
+    max-height: unset;
     @apply gap-16;
     font-size: 17px;
     flex-direction: row;
+    overflow: unset;
+  }
+  .navbar .nav-link a:last-child {
+    margin-bottom: unset;
   }
   .nav-item {
     padding: auto;
@@ -1179,11 +1391,12 @@ div.survey-card {
   }
   .news-text h1 {
     color: var(--darkgray);
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: bold;
+    font-size: 18px;
   }
   .news-text p {
     font-size: 16px;
+    font-family: "PT Sans", sans-serif;
   }
   .carousel-image {
     width: 100%;
@@ -1241,12 +1454,7 @@ div.survey-card {
 
   .button {
     @apply px-6 py-2;
-    height: fit-content;
-    width: fit-content;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
     font-size: 16px;
-    transition: all 0.4s ease-out;
   }
   .button-secondary {
     color: #d9dbdb;
@@ -1295,12 +1503,19 @@ div.survey-card {
   .survey-container {
     overflow-x: hidden;
   }
+  div.survey-card {
+    height: 240px;
+  }
   .news-homepage {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     padding: 24px 48px;
     height: 70vh;
     overflow-x: hidden;
+  }
+  .survey-card h3 {
+    margin-bottom: unset;
   }
   #activity h1 {
     font-weight: 700;
@@ -1329,6 +1544,12 @@ div.survey-card {
   .activity-item h3 {
     font-size: 18px;
   }
+  #publication .publication-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .publication-text h3 {
+    font-size: 18px;
+  }
   #training {
     flex-direction: row;
   }
@@ -1338,17 +1559,147 @@ div.survey-card {
   .training-text:hover {
     font-size: 60px;
   }
-  #register-form {
-    padding: 64px;
+  #seminar h1 {
+    font-size: 48px;
   }
-  #register-form .form-container {
+  #seminar .seminar-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  #training-form {
+    padding: 64px;
+    overflow: clip;
+  }
+  #training-form .form-container {
     flex-direction: row;
   }
-  #register-form .form-wrapper {
+  #training-form .form-wrapper {
     width: 50%;
+  }
+  #training-form .training-button-container {
+    display: flex;
+    gap: 12px;
+  }
+  #registerFinish {
+    width: 100%;
+    height: 80vh;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .register-finish-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .register-finish-container div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: "PT Sans", sans-serif;
+  }
+  .register-finish-container h1 {
+    font-size: 24px;
+    font-family: "PT Sans", sans-serif;
+    font-weight: bold;
+    margin: 12px 0;
+  }
+
+  .register-finish-container .icon-success {
+    width: 180px;
+    fill: #25d366;
+  }
+  .register-finish-container .icon-fail {
+    width: 180px;
+    fill: crimson;
   }
   .news-section-one {
     flex-direction: row;
+  }
+  #services {
+    background-color: var(--white);
+    padding: 24px 36px;
+  }
+  #services .services-type-container {
+    width: 100%;
+    display: grid;
+    /*     justify-content: space-around; */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #services .services-type-container svg {
+    height: 120px;
+    fill: var(--yellow);
+  }
+  .services-type-container .services-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 24px 12px;
+    position: relative;
+    height: fit-content;
+  }
+  .services-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.5s ease-in-out;
+  }
+  .services-dropdown span{
+    color: var(--midgray);
+    font-style: italic;
+  }
+  .services-dropdown.open{
+    max-height: 110px;
+  }
+  .services-type button {
+    transition: all 0.3s ease-out;
+    background-color: var(--yellow);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border:1px solid var(--yellow);
+    margin: unset;
+    padding: 6px;
+    height: 30px;
+    width: 30px;
+  }
+  .services-type button svg{
+    transition: all 0.3s ease-in-out;
+  }
+  .services-type button svg.open{
+    transform: rotate(-180deg);
+  }
+  .services-type button:hover {
+    background-color: var(--white);
+  }
+  .services-type button:hover svg {
+    fill: var(--yellow) !important;
+  }
+  .services-type button svg {
+    fill: var(--white) !important;
+  }
+  .services-type .services-type-text {
+    margin: 24px;
+  }
+  .services-type .services-type-text h3 {
+    font-size: 24px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    color: var(--darkgray);
+  }
+   .services-type-text span {
+    font-size: 18px;
+    font-family: "PT Sans", sans-serif;
+    color: var(--darkgray);
+  }
+  .services-dropdown span{
+    color: var(--midgray);
+    font-style: italic;
   }
   #news .news-wrapper {
     width: 70%;
@@ -1459,7 +1810,7 @@ div.survey-card {
     transition: max-height 0.5s ease-in-out;
   }
   #training-display .open {
-    max-height: 190px;
+    max-height: 250px;
   }
   #training-display .button-open {
     transform: rotateX(180deg);

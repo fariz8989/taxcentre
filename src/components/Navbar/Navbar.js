@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { icon } from "../../assets/Icon";
 export default function Navbar() {
   const toggleMenu = () => {
-    document.getElementById("main-nav").classList.toggle("open");
+    document.getElementsByClassName("nav-link")[0].classList.toggle("open");
   };
   return (
     <>
@@ -13,36 +13,89 @@ export default function Navbar() {
         </button>
         <nav class="navbar">
           <Link to={"/"}>
-          <div class="logo">
-            <img src={require('../../assets/Logo.webp')}/>
-          </div>
+            <div class="logo">
+              <img src={require("../../assets/Logo.webp")} />
+            </div>
           </Link>
           <nav className="nav-link">
-            <Link to={"/"} class="material-symbols-outlined nav-item">HOME</Link>
-            <Link to={"/training"} class="material-symbols-outlined nav-item dropdown">
+            <Link onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }} 
+            to={"/"} class="material-symbols-outlined nav-item">
+              HOME
+            </Link>
+            <Link
+             onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }}
+              to={"/training"}
+              class="material-symbols-outlined nav-item dropdown"
+            >
               TRAINING
               <div id="submenu">
-                <Link to={'/training/brevetab'}>
-                <div className="submenu-item"><span>Brevet A/B</span></div>
+                <Link
+                 onClick={() => {
+                  document
+                    .getElementsByClassName("nav-link")[0]
+                    .classList.remove("open");
+                }}
+                  to={"/training/brevetab"}
+                >
+                  <div className="submenu-item">
+                    <span>Brevet A/B</span>
+                  </div>
                 </Link>
-                <div className="submenu-item"><span>Brevet C</span></div>
-                <div className="submenu-item"><span>Sertifikasi PPJK</span></div>
+                <Link onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }} to={"/training/brevetc"}>
+                  <div className="submenu-item">
+                    <span>Brevet C</span>
+                  </div>
+                </Link>
+                <div className="submenu-item">
+                  <span>Sertifikasi PPJK</span>
+                </div>
               </div>
             </Link>
-            <Link to={"/about-us"} class="material-symbols-outlined nav-item">
-              CONSULTING
+            <Link onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }} to={"/services"} class="material-symbols-outlined nav-item">
+              SERVICES
             </Link>
-            <Link to={"/publication"} class="material-symbols-outlined nav-item">
-                PUBLICATION
+            <Link
+            onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }}
+              to={"/publication"}
+              class="material-symbols-outlined nav-item"
+            >
+              PUBLICATION
             </Link>
-            <Link to={"/news"} class="material-symbols-outlined nav-item">
-                NEWS
+            <Link 
+            onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }}to={"/news"} class="material-symbols-outlined nav-item">
+              NEWS
             </Link>
-            <Link to={"/about-us"} class="material-symbols-outlined nav-item">
+            <Link 
+            onClick={() => {
+              document
+                .getElementsByClassName("nav-link")[0]
+                .classList.remove("open");
+            }}to={"/about-us"} class="material-symbols-outlined nav-item">
               ABOUT US
-            </Link>
-            <Link to={"/about-us"} class="material-symbols-outlined nav-item">
-              LOGIN
             </Link>
           </nav>
         </nav>

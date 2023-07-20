@@ -38,7 +38,9 @@ export default function ServiceCarousel() {
                 condimentum nec quis velit. Suspendisse et felis sodales,
                 sodales velit porttitor, lobortis nibh.  
               </span>
+              <Link to={"/publication"}>
               <Button props={{ type: "secondary", text: "Learn More" }} />
+              </Link>
             </div>
           </div>
           <div className="carousel-item">
@@ -46,10 +48,7 @@ export default function ServiceCarousel() {
             <div className="carousel-text">
               <h1 className="carousel-title">TAX TRAINING</h1>
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                egestas mollis tincidunt. Quisque at nunc sit amet mi sagittis
-                condimentum nec quis velit. Suspendisse et felis sodales,
-                sodales velit porttitor, lobortis nibh.  
+                Tax Centre FIA UI melaksanakan program pelatihan sertifikasi, seminar dan workshop di bidang perpajakan dengan pengajar profesional baik dari akademisi dan praktisi 
               </span>
               <Link to={"/training"}>
               <Button props={{ type: "secondary", text: "Learn More"}} />

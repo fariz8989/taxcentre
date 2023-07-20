@@ -1,63 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef,useEffect,useState } from "react";
 import Button from "../Button/Button";
+import axios from "axios";
 export default function Survey(){
-    const surveyData= [1];
+    const [surveyData,setData]= useState(null);
+  useEffect(() => {
+    axios
+      .get("https://ui.taxcentre.id/api/questionnaire/list.html")
+      .then((res) => {
+        setData(res?.data.results)
+      });
+  }, []);
     const slider = useRef();
     let style = {
-        display:surveyData.length !==0 ? "block":"none"
+        display:surveyData?.length !==0 ? "block":"none"
     }
     return(<>
      <div style={style} id="survey">
         <h1>Current Survey</h1>
         <div ref={slider} className="survey-container">
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
+          {surveyData?.map(data=>{
+            return(<>
+             <div className="survey-card">
+            <h3>{data.Title} </h3>
             <Button props={{type:"primary", text:"Participate"}}/>
           </div>
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div> <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
-          <div className="survey-card">
-            <h3>Lorem Ipsum</h3>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in velit orci. Suspendisse sed arcu aliquet, accumsan ligula eget, sollicitudin tellus. Sed pellentesque eleifend posuere. Vivamus ac lacus vitae tellus dictum eleifend a ac magna. 
-            </p>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
+            </>)
+          })}
+         
+          
           
           
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
-export default function TrainingComponent(props) {
+export default function TrainingComponent({props}) {
   const toggle = useRef();
   const buttonToggle = useRef();
   const [dropdown, setDropdown] = useState(false);
@@ -9,49 +9,31 @@ export default function TrainingComponent(props) {
     toggle.current.classList.toggle("open");
     buttonToggle.current.classList.toggle("button-open");
   }, [dropdown]);
+
   return (
     <>
       <div id="training-display" className="">
         <div className="content-wrapper">
           <img src={require("../../assets/brevetA.webp")} />
           <div className="content-text">
-            <h1>Brevet A/B</h1>
+            <h1>{props.judul}</h1>
             <div>
               <h3>Tujuan Pelatihan</h3>
               <ol>
-                <li>
-                  Lulusan diharapkan dapat mengikuti ujian Sertifikasi Konsultan
-                  Pajak Indonesia (SKPI) yang diselenggarakan oleh Otoritas
-                  Sertifikasi.
-                </li>
-                <li>
-                  Lulusan dapat melaksanakan kewajiban-kewajiban dan hak-hak
-                  perpajakan sebagai Wajib Pajak dengan baik sesuai dengan
-                  ketentuan yang berlaku dalam praktik sehari-hari.
-                </li>
-                <li>
-                  Peserta mendapatkan perkembangan terkini (update) peraturan
-                  perpajakan.
-                </li>
+              {props.tujuan.map(data => {
+                return <li>{data}</li>
+              })}
+              
+                
               </ol>
             </div>
             <div>
               <h3>Metode Pelatihan</h3>
               <span>
-                Pelatihan diberikan dalam bentuk tatap muka, diskusi dan
-                pemecahan kasus (case study) dan latihan praktek secara intensif
-                dan mendalam atau Pelatihan daring melalui system platform yang
-                meungkinkan peserta mengikuti pelatihan jarak jauh dengan metode
-                diskusi interaktif.
+                {props.metode}
               </span>
             </div>
-            <div>
-              <h3>Periode Pelaksanaan</h3>
-              <span>
-                Pendaftaran : Agustus 2022 - April 2023 <br />
-                Pelatihan : Februari 2023 - Agustus 2023
-              </span>
-            </div>
+           
             {/* Dropdown */}
             <div className="materi">
               <div className="materi-title">
@@ -75,16 +57,14 @@ export default function TrainingComponent(props) {
               {/* Dropdown Item */}
               <div ref={toggle} className="materi-dropdown">
                 <ol>
-                  <li>Ketentuan Umum dan Tatacara Perpajakan (KUT) A</li>
-                  <li>Pemotongan dan Pemungutan Pajak Penghasilan</li>
-                  <li>Pajak Penghasilan Badan</li>
-                  <li>Pajak Penghasilan Orang Pribadi</li>
-                  <li>Pajak Pertambahan Nilai A</li>
-                  <li>Pelaporan Pajak Elektronik (E-SPT)</li>
+                  {props?.materi.map(data=>{
+                    return <li>{data}</li>
+                  })}
+                  
                 </ol>
               </div>
             </div>
-            <Link to={"/training/register?training=0"}>
+            <Link to={`/training/register`}>
             <Button props={{ type: "primary", text: "Daftar" }} />
             </Link>
           </div>

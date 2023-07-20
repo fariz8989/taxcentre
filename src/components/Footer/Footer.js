@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="mid-footer">
           <span>CONTACT US</span>
           <div>
-            <p>B Building Level 2, FISIP UI</p>
+            <p>B Building 2nd Floor, FISIP UI</p>
             <p>Universitas Indonesia</p>
             <p>Jawa Barat, Indonesia 16424</p>
           </div>

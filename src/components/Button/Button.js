@@ -5,12 +5,12 @@ export default function Button({props}){
         case 'primary':
 
             return(<>
-            <button onClick={props.function} className="button button-primary" disabled={disable}>{props.text}</button>
+            <button onClick={props.function} className={`button button-primary ${props.className}`} disabled={disable}>{props.text}</button>
             </>)
             break;
         case 'secondary':
             return(<>
-            <button className="button button-secondary">{props.text}</button>
+            <button onClick={props.function} className={`button button-secondary ${props.className}`}>{props.text}</button>
             </>)
             break;
         default:

@@ -1,6 +1,15 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 export default function Activity() {
+  const [pic,setPic] = useState(null)
+  useEffect(()=>{
+    const fetchActivity = async ()=>{
+      let result = await axios.get("https://ui.taxcentre.id/api/news/list.html?cat_id=4");
+      setPic(result.data.results[0].Foto) 
+      console.log(result.data.results[0].Foto)
+    }
+    fetchActivity()
+  },[])
   const slider = useRef();
   return (
     <>
@@ -9,19 +18,20 @@ export default function Activity() {
         <div className="activity-container">
           <div ref={slider} className="activity-slider">
             <div className="activity-item">
-              <img src={require("../../assets/brevetA.webp")} />
+              <img src={require("../../assets/aphi.jpeg")} />
+              <div>
+                <h3>Kegiatan FGD Asosiasi Pengusaha Hutan Indonesia {"(APHI)"} </h3>
+              </div>
+            </div>
+            <div className="activity-item">
+              <img src={pic === null ? "":pic} /> 
+             
               <div>
                 <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
               </div>
             </div>
             <div className="activity-item">
-              <img src={require("../../assets/brevetA.webp")} />
-              <div>
-                <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
-              </div>
-            </div>
-            <div className="activity-item">
-              <img src={require("../../assets/brevetA.webp")} />
+              <img src={require("../../assets/aphi.jpeg")} />
               <div>
                 <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
               </div>

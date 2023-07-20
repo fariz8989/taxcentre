@@ -1,6 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { icon } from "../../assets/Icon";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { date } from "../../helper/dateParser";
 export default function NewsDisplay() {
+  const [news, setNews] = useState({ data: null, done: false, error: false });
+  const { id } = useParams();
+  /* Parse HTML To String */
+  const domParser = () => {
+    const parser = new DOMParser();
+    const parsed = parser.parseFromString(news.data[0]?.Isi, "text/html").body
+      .children;
+    const result = [];
+    for (let i = 0; i < parsed.length; i++) {
+      result.push(parsed[i].innerHTML);
+    }
+    return result;
+  };
+  useEffect(() => {
+    axios
+      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
+      .then((res) => {
+        const filtered = res.data.results.map((data) => {
+          if (data.ID === id) return data;
+        });
+        setNews({ data: filtered, done: true, error: false });
+      })
+      .catch((err) => {
+        setNews({ ...news, done: true, error: true });
+      });
+  }, []);
   return (
     <>
       <div id="news-display">
@@ -9,9 +38,9 @@ export default function NewsDisplay() {
             <img src={require("../..//assets/consulting.webp")} />
           </div>
           <div className="news-display-text">
-            <h1>Penerapan Pajak Karbon pada PLTU A</h1>
+            <h1>{news.data === null ? "" : news.data[0]?.Title}</h1>
             <div className="news-information">
-              <span>Kamis, 3 Maret 2023</span>
+            <span>{news.data === null ? "" : date.parse(news?.data[0].Created)} </span>
               <div>
                 {icon.tags}
                 <span>Pajak</span>
@@ -21,51 +50,27 @@ export default function NewsDisplay() {
 
             {/* News Content */}
             <div className="news-content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse porta tortor a ligula gravida ultricies. Nulla porta
-                sollicitudin varius. Donec nec ultrices velit, ut egestas
-                turpis. Ut nibh magna, sodales vitae fringilla in, dapibus quis
-                lectus. Etiam vel facilisis odio. Aenean at dapibus metus.
-                Praesent velit augue, fermentum id facilisis at, tempor id
-                tortor. Nam vitae ligula aliquet, sagittis dolor porta, lobortis
-                turpis. Proin tristique egestas magna non bibendum.
-              </p>
-              <p>
-                Sed ut nunc sit amet massa scelerisque volutpat. Aliquam maximus
-                tortor consequat posuere tincidunt. Quisque imperdiet tincidunt
-                nunc eu dignissim. Aenean vel purus rutrum, euismod est et,
-                congue ipsum. Morbi porta tempor lorem, sit amet varius arcu
-                commodo in. In ullamcorper, dui id blandit condimentum, urna
-                felis iaculis dolor, vitae imperdiet lorem sapien a nulla.
-                Aenean vitae odio nec metus porta blandit et a quam. Sed ornare
-                dignissim mauris vitae ornare. Etiam massa nibh, malesuada vel
-                tincidunt ac, congue sit amet risus. Morbi semper augue nec
-                elementum accumsan. Nulla nec blandit massa. In eget porttitor
-                libero. Sed diam nibh, egestas sit amet odio at, sodales
-                accumsan mi. Phasellus et tempus est. Ut sollicitudin efficitur
-                turpis, et gravida elit euismod id.
-              </p>
-              <p>
-                Donec at mi malesuada, luctus libero sit amet, placerat elit.
-                Cras a mattis nibh. Donec velit ligula, vehicula et gravida id,
-                tristique a sem. Sed quis nisl quis dui convallis semper
-                vulputate non est. Fusce nec imperdiet enim. Praesent malesuada
-                lectus a varius pellentesque. Aenean nec dui faucibus, pulvinar
-                orci malesuada, pulvinar sapien. Donec cursus tellus in odio
-                placerat, eget euismod tortor dignissim. Donec nec eros leo.
-              </p>
+              {news.data === null
+                ? ""
+                : domParser().map((data) => {
+                    return <p>{data}</p>;
+                  })}
             </div>
             {/* END NEWS CONTENT */}
-            
           </div>
           {/* Share */}
           <div className="share-container">
             <span>Share News :</span>
             <div>
-                {icon.facebook}
-                {icon.whatsapp}
-                {icon.linkedin}
+            <a href={`https://api.whatsapp.com/send?text=${window.location.href}`}>
+              {icon.facebook}
+              </a>
+              <a href={`https://api.whatsapp.com/send?text=${window.location.href}`}>
+              {icon.whatsapp}
+              </a>
+              <a href={`https://api.whatsapp.com/send?text=${window.location.href}`}>
+              {icon.linkedin}
+              </a>
             </div>
           </div>
           {/* END SHARE */}
