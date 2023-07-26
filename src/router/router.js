@@ -60,6 +60,19 @@ export default function Router() {
                 type:"21017893"
               }}
             />} />
+            <Route path="/training/ppjk" element={ <TrainingComponent
+              props={{
+                judul: "PPJK",
+                tujuan: [
+                  "Peserta langsung dapat mengikuti ujian Sertifikasi Ahli Kepabeaan yang diselenggarakan oleh Otoritas Sertifikasi.",
+                  "Lulusan dapat melaksanakan kewajiban-kewajiban dan hak-hak serta dapat melakukan pengurusan jasa kepabeanan dengan baik sesuai dengan ketentuan kepabeanan yang berlaku."
+                ],
+                metode:
+                  "Pelatihan diberikan dalam bentuk tatap muka, diskusi dan pemecahan kasus (case study) dan latihan praktek secara intensif dan mendalam atau Pelatihan daring melalui system platform yang memungkinkan peserta mengikuti pelatihan jarak jauh dengan metode diskusi interaktif.",
+                materi:["Pengetahuan UU Kepabeanan", "Prosedur Impor","Prosedur Ekspor","Klasifikasi barang menurut BTKI","Sistem nilai pabean","Fasilitas kepabeanan I","Fasilitas kepabeanan II", "Administrasi perbendaharaan pabean"],
+                type:"21017893"
+              }}
+            />} />
             <Route path="/services" element={<ServicesPage/>} />
         <Route path="/training/register" element={<TrainingForm />} />
         <Route path="/training/register/finish" element={<RegisterFinish />} />

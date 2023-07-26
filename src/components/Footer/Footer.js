@@ -19,7 +19,11 @@ export default function Footer() {
           </div>
           <div className="footer-contact">
             <div className="footer-icon">{icon.phone}</div>
-            <p>{"(021) 78849147"}</p>
+            <p>{"(+62) 21-78849147"}</p>
+          </div>
+          <div className="footer-contact">
+            <div className="footer-icon">{icon.whatsapp}</div>
+            <Link to="https://wa.me/628111544404"><p>{"(+62) 811-1544-404"}</p></Link>
           </div>
           <div className="footer-contact">
             <div className="footer-icon">{icon.instagram}</div>

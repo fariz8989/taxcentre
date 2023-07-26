@@ -9,7 +9,7 @@ export default function NewsCatalog() {
     done:false
   });
   const content = ()=>{
-    if(data.done == false)
+    if(data.done === false)
     return <h1 id="Loading">Loading</h1>
     return data?.data.map((data) => {
       return (
@@ -17,7 +17,7 @@ export default function NewsCatalog() {
           <div className="publication-card">
             <img
               className="publication-image"
-              src={require("../../assets/brevetA.webp")}
+              src={data.Foto ? data.Foto : require('../../assets/no-image.png')}
             />
             <div className="publication-text">
               <h3>{data.Title}</h3>

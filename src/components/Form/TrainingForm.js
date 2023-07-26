@@ -267,6 +267,12 @@ export default function RegisterForm() {
             />
           </div>
         </div>
+        <div>
+          {/*Currnt Participant List */}
+          {/* {participant?.map(data=>{
+            return <p>{data.name}</p>
+          })} */}
+        </div>
         <div className="declaration">
           <h3>Pernyataan/Declaration</h3>
           <ol>

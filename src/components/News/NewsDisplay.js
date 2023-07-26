@@ -9,7 +9,7 @@ export default function NewsDisplay() {
   /* Parse HTML To String */
   const domParser = () => {
     const parser = new DOMParser();
-    const parsed = parser.parseFromString(news.data[0]?.Isi, "text/html").body
+    const parsed = parser.parseFromString(news.data?.Isi, "text/html").body
       .children;
     const result = [];
     for (let i = 0; i < parsed.length; i++) {
@@ -17,30 +17,19 @@ export default function NewsDisplay() {
     }
     return result;
   };
-  useEffect(() => {
-    axios
-      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
-      .then((res) => {
-        const filtered = res.data.results.map((data) => {
-          if (data.ID === id) return data;
-        });
-        setNews({ data: filtered, done: true, error: false });
-      })
-      .catch((err) => {
-        setNews({ ...news, done: true, error: true });
-      });
-  }, []);
-  return (
-    <>
-      <div id="news-display">
-        <div className="news-wrapper">
+  //Loading and Content
+  const content = ()=>{
+    if(news.done === false)
+    return <h1 id="Loading">Loading</h1>
+    return <>
+    <div className="news-wrapper">
           <div>
-            <img src={require("../..//assets/consulting.webp")} />
+            <img src={news.data?.Foto ? news.data?.Foto:""} />
           </div>
           <div className="news-display-text">
-            <h1>{news.data === null ? "" : news.data[0]?.Title}</h1>
+            <h1>{news.data === null ? "" : news.data?.Title}</h1>
             <div className="news-information">
-            <span>{news.data === null ? "" : date.parse(news?.data[0].Created)} </span>
+            <span>{news.data === null ? "" : date.parse(news?.data?.Created)} </span>
               <div>
                 {icon.tags}
                 <span>Pajak</span>
@@ -75,6 +64,27 @@ export default function NewsDisplay() {
           </div>
           {/* END SHARE */}
         </div>
+    </>
+  }
+  useEffect(() => {
+    axios
+      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
+      .then((res) => {
+        res.data.results.forEach((data) => {
+          if(data.ID === id)
+          setNews({ data: data, done: true, error: false });
+        });
+        console.log(news)
+        
+      })
+      .catch((err) => {
+        setNews({ ...news, done: true, error: true });
+      });
+  }, []);
+  return (
+    <>
+      <div id="news-display">
+        {content()}
       </div>
     </>
   );

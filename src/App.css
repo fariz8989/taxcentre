@@ -226,9 +226,10 @@ button:disabled {
 .activity-slider .activity-item {
   position: relative;
   background-color: var(--darkgray);
-  min-width: 284px;
-  min-height: 200px;
+  width: 400px;
+  height: 250px;
   border-radius: 8px;
+  aspect-ratio: 16/9;
 }
 .activity-item div {
   width: 100%;
@@ -315,6 +316,11 @@ div.survey-card {
   grid-template-columns: repeat(1, 1fr);
   padding: 36px;
   @apply gap-8;
+}
+.latest-news-image {
+  @apply w-full object-cover;
+  height: 50%;
+  aspect-ratio: 16/9;
 }
 .carousel-grid .grid-item:nth-child(3) {
   display: none;
@@ -578,6 +584,11 @@ div.survey-card {
   background-color: var(--white);
   height: 400px;
   position: relative;
+  transition: all 0.3s ease-in-out;
+}
+#seminar .seminar-card:hover {
+  background-color: var(--lightgray);
+  transform: translateY(-10px);
 }
 #seminar .seminar-image {
   width: 100%;
@@ -890,6 +901,7 @@ div.survey-card {
   width: 100%;
   height: 50%;
   object-fit: cover;
+  aspect-ratio: 16/9;
 }
 #publication .css-1oj2twp-MuiPagination-root {
   display: flex;
@@ -1117,11 +1129,21 @@ div.survey-card {
 .team-image {
   width: 100%;
   height: 100%;
+
+}
+ .team-image.team-image-1{
   background: linear-gradient(to right, rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.2)),
     url("./assets/gunadi.jpeg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.team-image.team-image-2{
+  background: linear-gradient(to right, rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.2)),
+    url("./assets/haula.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .team-name {
   width: 100%;
@@ -1154,7 +1176,14 @@ div.survey-card {
   justify-content: center;
   align-items: center;
   background-color: #d9dbdb;
+  position: relative;
 }
+#news-display h1#Loading{
+  left: unset;
+  transform: unset;
+  margin: 24px;
+}
+
 #news-display .news-wrapper:nth-child(1) {
   width: 100%;
   padding: 24px 46px;
@@ -1390,8 +1419,6 @@ div.survey-card {
     color: var(--midgray);
   }
   .news-text h1 {
-    color: var(--darkgray);
-    font-weight: bold;
     font-size: 18px;
   }
   .news-text p {
@@ -1406,7 +1433,7 @@ div.survey-card {
     background-repeat: no-repeat;
     opacity: 0.7;
   }
-  .carousel-1 {
+  /*  .carousel-1 {
     background-image: url("./assets//consulting.webp");
   }
   .carousel-2 {
@@ -1414,7 +1441,7 @@ div.survey-card {
   }
   .carousel-3 {
     background-image: url("./assets//training.webp");
-  }
+  } */
   .carousel-text {
     position: absolute;
     left: 0;
@@ -1538,8 +1565,8 @@ div.survey-card {
     scroll-behavior: smooth;
   }
   .activity-slider .activity-item {
-    min-width: 470px;
-    min-height: 320px;
+    width: 470px;
+    height: 320px;
   }
   .activity-item h3 {
     font-size: 18px;
@@ -1645,11 +1672,11 @@ div.survey-card {
     position: relative;
     transition: max-height 0.5s ease-in-out;
   }
-  .services-dropdown span{
+  .services-dropdown span {
     color: var(--midgray);
     font-style: italic;
   }
-  .services-dropdown.open{
+  .services-dropdown.open {
     max-height: 110px;
   }
   .services-type button {
@@ -1662,16 +1689,16 @@ div.survey-card {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50%;
-    border:1px solid var(--yellow);
+    border: 1px solid var(--yellow);
     margin: unset;
     padding: 6px;
     height: 30px;
     width: 30px;
   }
-  .services-type button svg{
+  .services-type button svg {
     transition: all 0.3s ease-in-out;
   }
-  .services-type button svg.open{
+  .services-type button svg.open {
     transform: rotate(-180deg);
   }
   .services-type button:hover {
@@ -1692,12 +1719,12 @@ div.survey-card {
     font-weight: bold;
     color: var(--darkgray);
   }
-   .services-type-text span {
+  .services-type-text span {
     font-size: 18px;
     font-family: "PT Sans", sans-serif;
     color: var(--darkgray);
   }
-  .services-dropdown span{
+  .services-dropdown span {
     color: var(--midgray);
     font-style: italic;
   }
@@ -1905,15 +1932,6 @@ div.survey-card {
   }
   #team .team-pic {
     width: 35%;
-  }
-  .team-image {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.2)),
-      url("./assets/gunadi.jpeg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
   }
   .team-name {
     width: 100%;

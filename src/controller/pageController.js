@@ -75,7 +75,7 @@ function HomePage() {
             <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
               <img
                 className=" h-1/2 w-full object-cover "
-                src={require("../assets/training.webp")}
+                src={displayedNews[0]?.Foto ? displayedNews[0]?.Foto : ""}
                 alt=""
               />
               <div className="news-text">
@@ -83,11 +83,61 @@ function HomePage() {
                   {" "}
                   {newsData.done === false
                     ? ""
-                    : date.parse(displayedNews[0].Created)}
+                    : date.parse(displayedNews[0]?.Created)}
                 </span>
                 <h1 className="">
                   {" "}
-                  {newsData.done === false ? "" : displayedNews[0].Title}
+                  {newsData.done === false ? "" : displayedNews[0]?.Title}
+                </h1>
+              </div>
+            </div>
+          </Link>
+          <Link
+            to={`/news/${newsData.done === false ? "" : displayedNews[1]?.ID}`}
+          >
+            <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <img
+                className=" h-1/2 w-full object-cover "
+                src={displayedNews[1]?.Foto ? displayedNews[1]?.Foto : ""}
+                alt=""
+              />
+              <div className="news-text">
+                <span>
+                  {" "}
+                  {newsData.done === false
+                    ? ""
+                    : date.parse(displayedNews[1]?.Created)}
+                </span>
+                <h1 className="">
+                  {" "}
+                  {newsData.done === false ? "" : displayedNews[1]?.Title}
+                </h1>
+              </div>
+            </div>
+          </Link>
+          <Link
+            to={`/news/${newsData.done === false ? "" : displayedNews[2]?.ID}`}
+          >
+            <div className="grid-item h-full hover:bg-gray-300 hover:-translate-y-3 transition ease-out duration-500 rounded bg-gray-200 border-gray-300 shadow-md overflow-hidden my-2 pb-4">
+              <img
+                className=" h-1/2 w-full object-cover "
+                src={
+                  displayedNews[2]?.Foto !== undefined
+                    ? displayedNews[2]?.Foto
+                    : ""
+                }
+                alt=""
+              />
+              <div className="news-text">
+                <span>
+                  {" "}
+                  {newsData.done === false
+                    ? ""
+                    : date.parse(displayedNews[2]?.Created)}
+                </span>
+                <h1 className="">
+                  {" "}
+                  {newsData.done === false ? "" : displayedNews[2]?.Title}
                 </h1>
               </div>
             </div>
@@ -178,25 +228,27 @@ function TrainingPage() {
       return (
         <>
           {/* CARD START */}
-          <div className="seminar-card">
-            <img
-              className="seminar-image"
-              src={require("../assets/brevetA.webp")}
-            />
-            <div className="seminar-text">
-              <h3>{data.Judul}</h3>
-              <div className="seminar-info">
-                <div>
-                  {icon.clock}
-                  <span>{date.parse(data.Date)}</span>
-                </div>
-                <div>
-                  {icon.tags}
-                  <span>Pajak</span>
+          <Link to={"/training/register"}>
+            <div className="seminar-card">
+              <img
+                className="seminar-image"
+                src={require("../assets/brevetA.webp")}
+              />
+              <div className="seminar-text">
+                <h3>{data.Judul}</h3>
+                <div className="seminar-info">
+                  <div>
+                    {icon.clock}
+                    <span>{date.parse(data.Date)}</span>
+                  </div>
+                  <div>
+                    {icon.tags}
+                    <span>Pajak</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
           {/* CARD END */}
         </>
       );
@@ -237,18 +289,17 @@ function TrainingPage() {
           </Link>
         </div>
         <div className="training-item">
-          <div className="training-image ppjk"></div>
-          <div className="training-text">
-            <h2>PPJK</h2>
-          </div>
+          <Link to={"/training/ppjk"}>
+            <div className="training-image ppjk"></div>
+            <div className="training-text">
+              <h2>PPJK</h2>
+            </div>
+          </Link>
         </div>
       </div>
       <div id="seminar">
         <h1>Webinar & Seminar</h1>
-        <div className="seminar-container">
-          {console.log(data)}
-          {content()}
-        </div>
+        <div className="seminar-container">{content()}</div>
       </div>
     </>
   );
@@ -259,15 +310,31 @@ function NewsPage() {
     done: false,
     error: false,
   });
+  const [popularNews, setPopularNews] = useState({
+    data: null,
+    done: false,
+    error: false,
+  });
   useEffect(() => {
-    //News DAta Request
+    //News Carousel Data Request
     axios
       .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
       .then((res) => {
+        console.log(res.data.results);
         setNewsData({ data: res.data.results, done: true, error: false });
       })
       .catch((err) => {
         setNewsData({ ...newsData, done: true, error: true });
+      });
+    //Popular News Data Fetch
+    axios
+      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
+      .then((res) => {
+        //Tambahin Filter Sort Popular Nanti
+        setPopularNews({ data: res.data.results, done: true, error: false });
+      })
+      .catch((err) => {
+        setPopularNews({ ...popularNews, done: true, error: true });
       });
   }, []);
   return (
@@ -279,46 +346,23 @@ function NewsPage() {
           </div>
           <div className="popular-news-wrapper">
             <h1>TERPOPULER</h1>
+            {popularNews.data !== null
+              ? popularNews.data.slice(0,3).map((data) => {
+                  return (
+                    <Link to={`/news/${data.ID}`}>
+                    <div className="popular-news-container">
+                      {/* Ambil Index dan Tambah 1 Karena Dari 0 Buat Peringkat */}
+                      <span>{popularNews.data.slice(0,3).indexOf(data,0)+1}</span>
+                      <div>
+                        <span className="popular-news-title">Pajak Karbon</span>
+                        <h3>{data.Title}</h3>
+                      </div>
+                    </div>
+                    </Link>
+                  );
+                })
+              : ""}
             {/* 1 */}
-            <div className="popular-news-container">
-              <span>1</span>
-              <div>
-                <span className="popular-news-title">Pajak Karbon</span>
-                <h3>Penerapan pajak karbon pada PLTU A</h3>
-              </div>
-            </div>
-            {/* 2 */}
-            <div className="popular-news-container">
-              <span>2</span>
-              <div>
-                <span className="popular-news-title">Pajak Karbon</span>
-                <h3>Penerapan pajak karbon pada PLTU A</h3>
-              </div>
-            </div>
-            {/* 3 */}
-            <div className="popular-news-container">
-              <span>3</span>
-              <div>
-                <span className="popular-news-title">Pajak Karbon</span>
-                <h3>Penerapan pajak karbon pada PLTU A</h3>
-              </div>
-            </div>
-            {/* 4 */}
-            <div className="popular-news-container">
-              <span>4</span>
-              <div>
-                <span className="popular-news-title">Pajak Karbon</span>
-                <h3>Penerapan pajak karbon pada PLTU A</h3>
-              </div>
-            </div>
-            {/* 5 */}
-            <div className="popular-news-container">
-              <span>5</span>
-              <div>
-                <span className="popular-news-title">Pajak Karbon</span>
-                <h3>Penerapan pajak karbon pada PLTU A</h3>
-              </div>
-            </div>
           </div>
         </div>
         <div className="news-section-two">
@@ -360,7 +404,9 @@ function ServicesPage() {
               <div>
                 <h3>Research</h3>
                 <span>
-                Performing research in taxation and economics topic with our experienced expert both academic and practition for scientific and technical porpuses
+                  Performing research in taxation and economics topic with our
+                  experienced expert both academic and practition for scientific
+                  and technical porpuses
                 </span>
               </div>
               <button
@@ -372,7 +418,7 @@ function ServicesPage() {
                 }}
               >
                 <svg
-                className={`${isOpen.research ? "open" : ""}`}
+                  className={`${isOpen.research ? "open" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -383,7 +429,9 @@ function ServicesPage() {
                 className={`services-dropdown ${isOpen.research ? "open" : ""}`}
               >
                 <span>
-                Our research covers wide taxation and economics topic such as, VAT, Income and International Taxation, Environmental Tax, Macro Economy and Financial Sector and etc.
+                  Our research covers wide taxation and economics topic such as,
+                  VAT, Income and International Taxation, Environmental Tax,
+                  Macro Economy and Financial Sector and etc.
                 </span>
               </div>
             </div>
@@ -395,7 +443,9 @@ function ServicesPage() {
               <div>
                 <h3>Training, Workshop and Seminar</h3>
                 <span>
-                The FIA UI Tax Center carries out certification training programs, seminars and workshops in the field of taxation with professional instructors from both academics and practitioners
+                  The FIA UI Tax Center carries out certification training
+                  programs, seminars and workshops in the field of taxation with
+                  professional instructors from both academics and practitioners
                 </span>
               </div>
               <button
@@ -407,7 +457,7 @@ function ServicesPage() {
                 }}
               >
                 <svg
-                className={`${isOpen.training ? "open" : ""}`}
+                  className={`${isOpen.training ? "open" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -418,7 +468,7 @@ function ServicesPage() {
                 className={`services-dropdown ${isOpen.training ? "open" : ""}`}
               >
                 <span>
-                Our routine training covers Brevet A/B, Brevet C and PPJK 
+                  Our routine training covers Brevet A/B, Brevet C and PPJK
                 </span>
               </div>
             </div>
@@ -429,7 +479,9 @@ function ServicesPage() {
               <div>
                 <h3>Tax and Legal Advisory and Consultant</h3>
                 <span>
-                Performing research in taxation and economics topic with our experienced expert both academic and practition for scientific and technical porpuses
+                  Performing research in taxation and economics topic with our
+                  experienced expert both academic and practition for scientific
+                  and technical porpuses
                 </span>
               </div>
               <button
@@ -441,7 +493,7 @@ function ServicesPage() {
                 }}
               >
                 <svg
-                className={`${isOpen.research ? "open" : ""}`}
+                  className={`${isOpen.research ? "open" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -452,7 +504,9 @@ function ServicesPage() {
                 className={`services-dropdown ${isOpen.research ? "open" : ""}`}
               >
                 <span>
-                Our research covers wide taxation and economics topic such as, VAT, Income and International Taxation, Environmental Tax, Macro Economy and Financial Sector and etc.
+                  Our research covers wide taxation and economics topic such as,
+                  VAT, Income and International Taxation, Environmental Tax,
+                  Macro Economy and Financial Sector and etc.
                 </span>
               </div>
             </div>
@@ -463,7 +517,9 @@ function ServicesPage() {
               <div>
                 <h3>Research</h3>
                 <span>
-                Performing research in taxation and economics topic with our experienced expert both academic and practition for scientific and technical porpuses
+                  Performing research in taxation and economics topic with our
+                  experienced expert both academic and practition for scientific
+                  and technical porpuses
                 </span>
               </div>
               <button
@@ -475,7 +531,7 @@ function ServicesPage() {
                 }}
               >
                 <svg
-                className={`${isOpen.research ? "open" : ""}`}
+                  className={`${isOpen.research ? "open" : ""}`}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 512 512"
                 >
@@ -486,7 +542,9 @@ function ServicesPage() {
                 className={`services-dropdown ${isOpen.research ? "open" : ""}`}
               >
                 <span>
-                Our research covers wide taxation and economics topic such as, VAT, Income and International Taxation, Environmental Tax, Macro Economy and Financial Sector and etc.
+                  Our research covers wide taxation and economics topic such as,
+                  VAT, Income and International Taxation, Environmental Tax,
+                  Macro Economy and Financial Sector and etc.
                 </span>
               </div>
             </div>

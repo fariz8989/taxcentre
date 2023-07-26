@@ -12,7 +12,7 @@ export default function TeamCarousel() {
           autoplay={false}
         >
           <div className="carousel-item">
-            <div className="team-image"></div>
+            <div className="team-image team-image-1"></div>
             <div className="team-name">
               <div>
                 <h2>Prof. Dr. Gunadi, M.Sc, Akt</h2>
@@ -20,7 +20,15 @@ export default function TeamCarousel() {
               </div>
             </div>
           </div>
-          <div className="carousel-item"></div>
+          <div className="carousel-item">
+          <div className="team-image team-image-2"></div>
+            <div className="team-name">
+              <div>
+                <h2>Prof. Dr. Haula Rosdiana, M.Si</h2>
+                <span>Akademisi</span>
+              </div>
+            </div>
+          </div>
           <div className="carousel-item"></div>
         </Carousel>
       </div>
