@@ -20,10 +20,7 @@ export default function ServiceCarousel() {
             <div className="carousel-text">
               <h1 className="carousel-title">TAX CONSULTING</h1>
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                egestas mollis tincidunt. Quisque at nunc sit amet mi sagittis
-                condimentum nec quis velit. Suspendisse et felis sodales,
-                sodales velit porttitor, lobortis nibh.  
+                Tax Centre FIA UI dapat membantu anda dalam melakukan perencanaan perpajakan untuk memenuhi kewajiban perpajakan secara optimal  
               </span>
               <Button props={{ type: "secondary", text: "Learn More" }} />
             </div>
@@ -33,10 +30,7 @@ export default function ServiceCarousel() {
             <div className="carousel-text">
               <h1 className="carousel-title">TAX RESEARCH</h1>
               <span>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                egestas mollis tincidunt. Quisque at nunc sit amet mi sagittis
-                condimentum nec quis velit. Suspendisse et felis sodales,
-                sodales velit porttitor, lobortis nibh.  
+                Melakukan penelitian di bidang perpajakan dan ekonomi dengan ahli yang berpengalaman dengan tujuan pengetahuan dan teknis
               </span>
               <Link to={"/publication"}>
               <Button props={{ type: "secondary", text: "Learn More" }} />

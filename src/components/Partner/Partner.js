@@ -1,23 +1,57 @@
-import React from "react";
-export default function Partner(){
-    return(<>
-    <div className="partner-container">
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+export default function Partner() {
+  const [partnerList, setPartnerList] = useState({ done: false, data: [] });
+  useEffect(() => {
+    async function getPartner() {
+      const result = await axios.get(
+        "https://ui.taxcentre.id/backend/api/organization/list.html?type=partner"
+      );
+      setPartnerList({
+        ...partnerList,
+        done: true,
+        data: result.data.results.slice(0, 8),
+      });
+    }
+    getPartner();
+  }, []);
+  return (
+    <>
+      <div className="partner-container">
         <h1 className="partner-title">Our Partner & Client</h1>
-        <div className="partner-inner-container">
-        <div className="partner-wrapper">
-            <img loading="lazy"alt="DJP" src={require('../../assets/DJP.png')}/>
-            <img loading="lazy"alt="PWC" src={require('../../assets/PWC.png')}/>
-            <img loading="lazy"alt="EY" src={require('../../assets/EY.png')}/>
-   
-
-        </div>    <div className="partner-wrapper">
-           
-            <img loading="lazy"alt="UNSW" src={require('../../assets/UNSW.png')}/>
-            <img loading="lazy"alt="" src={require('../../assets/melbourne.png')}/>
-            <img loading="lazy"alt="AFD" src={require('../../assets/AFD.png')}/>
-
-        </div>
-        </div>
-    </div>
-    </>)
+        {partnerList.done === true ? (
+          <div className="partner-inner-container">
+            <div className="partner-wrapper">
+              {partnerList.done
+                ? partnerList.data.slice(0, 4).map((data) => {
+                    return (
+                      <img
+                        loading="lazy"
+                        alt={data.Name}
+                        src={data.Logo ? data.Logo : ""}
+                      />
+                    );
+                  })
+                : ""}
+            </div>
+            <div className="partner-wrapper">
+              {partnerList.done
+                ? partnerList.data.slice(4, 8).map((data) => {
+                    return (
+                      <img
+                        loading="lazy"
+                        alt={data.Name}
+                        src={data.Logo ? data.Logo : ""}
+                      />
+                    );
+                  })
+                : ""}
+            </div>
+          </div>
+        ) : (
+          <h1 id="Loading">Loading</h1>
+        )}
+      </div>
+    </>
+  );
 }

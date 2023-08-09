@@ -15,16 +15,17 @@ import LoginForm from "../components/Form/LoginForm";
 import RegisterFinish from "../components/Form/FormFinish";
 import NewsCatalog from "../components/News/NewsCatalog";
 import PublicationDisplay from "../components/Publication/PublicationDisplay";
+import OTPInput from "react-otp-input";
 export default function Router() {
   return (
     <>
-      <Routes basename="/frontend">
+      <Routes basename="/main">
         <Route path="/" element={<HomePage />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/training" element={<TrainingPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/news/catalog" element={<NewsCatalog />} />
-        
+
         <Route path="/news/:id" element={<NewsDisplay />} />
         <Route path="/login" element={<LoginForm />} />
         <Route
@@ -40,13 +41,28 @@ export default function Router() {
                 ],
                 metode:
                   "Pelatihan diberikan dalam bentuk tatap muka, diskusi dan pemecahan kasus (case study) dan latihan praktek secara intensif dan mendalam atau Pelatihan daring melalui system platform yang memungkinkan peserta mengikuti pelatihan jarak jauh dengan metode diskusi interaktif.",
-                materi:["Ketentuan Umum dan Tatacara Perpajakan (KUT) A", "Pemotongan dan Pemungutan Pajak Penghasilan","Pajak Penghasilan Badan","Pajak Penghasilan Orang Pribadi","Pajak Pertambahan Nilai A","Pelaporan Pajak Elektronik (E-SPT)"],
-                type:"21017875"
+                materi: [
+                  "Ketentuan Umum dan Tatacara Perpajakan (KUP) A",
+                  "Pajak Penghasilan Orang Pribadi",
+                  "Pajak Pertambahan Nilai A",
+                  "Pajak Bumi dan Bangunan",
+                  "BPHTB dan Bea Materai",
+                  "Pemotongan dan Pemungutan Pajak Penghasilan",
+                  "Pajak Penghasilan Badan",
+                  "Pajak Pertambahan Nilai B",
+                  "Pemeriksaan Pajak",
+                  "Akuntansi Perpajakan",
+                  "Pelaporan Pajak Elektronik (E-SPT)",
+                ],
+                type: "21017875",
               }}
             />
           }
         />
-        <Route path="/training/brevetc" element={ <TrainingComponent
+        <Route
+          path="/training/brevetc"
+          element={
+            <TrainingComponent
               props={{
                 judul: "Brevet C",
                 tujuan: [
@@ -56,29 +72,53 @@ export default function Router() {
                 ],
                 metode:
                   "Pelatihan diberikan dalam bentuk tatap muka, diskusi dan pemecahan kasus (case study) dan latihan praktek secara intensif dan mendalam atau Pelatihan daring melalui system platform yang memungkinkan peserta mengikuti pelatihan jarak jauh dengan metode diskusi interaktif.",
-                materi:["Kebijakan Umum Perpajakan", "Perpajakan Internasional","Transfer Pricing","Pajak Penghasilan Badan C","Pajak Pertambahan Nilai A","Akuntansi Perpajakan C","Perencanaan Perpajakan", "Pemotongan dan Pemungutan Pajak Penghasilan C"],
-                type:"21017893"
+                materi: [
+                  "Kebijakan Umum Perpajakan",
+                  "Perpajakan Internasional",
+                  "Transfer Pricing",
+                  "Pajak Penghasilan Badan C",
+                  "Pajak Pertambahan Nilai A",
+                  "Akuntansi Perpajakan C",
+                  "Perencanaan Perpajakan",
+                  "Pemotongan dan Pemungutan Pajak Penghasilan C",
+                ],
+                type: "21017893",
               }}
-            />} />
-            <Route path="/training/ppjk" element={ <TrainingComponent
+            />
+          }
+        />
+        <Route
+          path="/training/ppjk"
+          element={
+            <TrainingComponent
               props={{
                 judul: "PPJK",
                 tujuan: [
                   "Peserta langsung dapat mengikuti ujian Sertifikasi Ahli Kepabeaan yang diselenggarakan oleh Otoritas Sertifikasi.",
-                  "Lulusan dapat melaksanakan kewajiban-kewajiban dan hak-hak serta dapat melakukan pengurusan jasa kepabeanan dengan baik sesuai dengan ketentuan kepabeanan yang berlaku."
+                  "Lulusan dapat melaksanakan kewajiban-kewajiban dan hak-hak serta dapat melakukan pengurusan jasa kepabeanan dengan baik sesuai dengan ketentuan kepabeanan yang berlaku.",
                 ],
                 metode:
                   "Pelatihan diberikan dalam bentuk tatap muka, diskusi dan pemecahan kasus (case study) dan latihan praktek secara intensif dan mendalam atau Pelatihan daring melalui system platform yang memungkinkan peserta mengikuti pelatihan jarak jauh dengan metode diskusi interaktif.",
-                materi:["Pengetahuan UU Kepabeanan", "Prosedur Impor","Prosedur Ekspor","Klasifikasi barang menurut BTKI","Sistem nilai pabean","Fasilitas kepabeanan I","Fasilitas kepabeanan II", "Administrasi perbendaharaan pabean"],
-                type:"21017893"
+                materi: [
+                  "Pengetahuan UU Kepabeanan",
+                  "Prosedur Impor",
+                  "Prosedur Ekspor",
+                  "Klasifikasi barang menurut BTKI",
+                  "Sistem nilai pabean",
+                  "Fasilitas kepabeanan I",
+                  "Fasilitas kepabeanan II",
+                  "Administrasi perbendaharaan pabean",
+                ],
+                type: "21017893",
               }}
-            />} />
-            <Route path="/services" element={<ServicesPage/>} />
+            />
+          }
+        />
+        <Route path="/services" element={<ServicesPage />} />
         <Route path="/training/register" element={<TrainingForm />} />
         <Route path="/training/register/finish" element={<RegisterFinish />} />
         <Route path="/publication" element={<PublicationPage />} />
-        <Route path="/publication/:id" element={<PublicationDisplay/>} />
-        
+        <Route path="/publication/:id" element={<PublicationDisplay />} />
       </Routes>
     </>
   );

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { date } from "../../helper/dateParser";
 export default function Activity() {
   const [pic, setPic] = useState(null);
   useEffect(() => {
     const fetchActivity = async () => {
       let result = await axios.get(
-        "https://ui.taxcentre.id/api/news/list.html?cat_id=4"
+        "https://ui.taxcentre.id/backend/api/news/list.html?cat_id=4"
       );
       setPic(result.data.results);
     };
@@ -23,31 +24,12 @@ export default function Activity() {
                 <img src={data.Foto ? data.Foto:require("../../assets/no-image.png")}/>
                 <div>
                   <h3>
-                    Kegiatan FGD Asosiasi Pengusaha Hutan Indonesia {"(APHI)"}{" "}
+                    {data.Title}
                   </h3>
+                  <span>{date.parse(data.Created)}</span>
                 </div>
               </div>;
-            }):""}
-
-            {/*  <div className="activity-item">
-              <img src={pic === null ? "":pic} /> 
-             
-              <div>
-                <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
-              </div>
-            </div>
-            <div className="activity-item">
-              <img src={require("../../assets/aphi.jpeg")} />
-              <div>
-                <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
-              </div>
-            </div>
-            <div className="activity-item">
-              <img src={require("../../assets/brevetA.webp")} />
-              <div>
-                <h3>KEGIATAN PELATIHAN BREVET A/B</h3>
-              </div>
-            </div> */}
+            }):<h1 id="Loading">Loading</h1>}
           </div>
         </div>
         <button

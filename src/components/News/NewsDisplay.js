@@ -32,7 +32,7 @@ export default function NewsDisplay() {
             <span>{news.data === null ? "" : date.parse(news?.data?.Created)} </span>
               <div>
                 {icon.tags}
-                <span>Pajak</span>
+                <span>{news.data === null ? "":news.data.Category}</span>
               </div>
             </div>
             <span>Penulis : Ahmad Fariz</span>
@@ -68,13 +68,12 @@ export default function NewsDisplay() {
   }
   useEffect(() => {
     axios
-      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
+      .get("https://ui.taxcentre.id/backend/api/news/list.html?cat_id=1")
       .then((res) => {
         res.data.results.forEach((data) => {
           if(data.ID === id)
           setNews({ data: data, done: true, error: false });
         });
-        console.log(news)
         
       })
       .catch((err) => {

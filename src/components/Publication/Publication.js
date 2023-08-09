@@ -19,6 +19,8 @@ export default function Publication() {
   const content = ()=>{
     if(data.done === false)
     return <h1 id="Loading">Loading</h1>
+    if((data.done && data.data !== null) || (data.done && data.data.length === 0))
+    return <h2>Data Not Found</h2>
     return currentPosts?.map((data) => {
       return (
         <>
@@ -41,12 +43,13 @@ export default function Publication() {
   }
   useEffect(() => {
      axios
-      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=2")
+      .get("https://ui.taxcentre.id/backend/api/news/list.html?cat_id=2")
       .then((res) => {
         setData({data:res.data.results, done:true});
-        console.log(res.data)
       })
-      .catch((err) => {}); 
+      .catch((err) => {
+        setData({error:true,errMessage:typeof err.message, done:true})
+      }); 
   }, []);
   
   return (

@@ -32,12 +32,14 @@ export default function NewsCatalog() {
   }
   useEffect(() => {
     axios
-      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=1")
+      .get("https://ui.taxcentre.id/backend/api/news/list.html?cat_id=1")
       .then((res) => {
         setData({data:res.data.results, done:true});
-        console.log(res)
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setData({done:true, error:true
+        })
+      });
   }, []);
   
   return (

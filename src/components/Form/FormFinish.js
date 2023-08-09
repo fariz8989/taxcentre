@@ -10,7 +10,7 @@ export default function RegisterFinish() {
    
     
   },[]);
-  if (state.status)
+  if (state.status=== true)
     return (
       <>
         <div id="registerFinish">

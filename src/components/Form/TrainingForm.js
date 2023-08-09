@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import Button from "../Button/Button";
 import axios from "axios";
+import OTPInput from "react-otp-input";
 export default function RegisterForm() {
   const navigate = useNavigate();
   //Agreed Button
@@ -19,17 +20,28 @@ export default function RegisterForm() {
     return [year, month, day].join("-");
   }
   const today = getDate();
-  const [participantData, setParticipantData] = useState({name:"",email:"",phone:""});
+  const [participantData, setParticipantData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
   const [participant, setParticipant] = useState([]);
+  const [otp, setOtp] = useState("");
+  const [otpData, setOtpData] = useState(""); // OTP From Request BE
+  const [registrationData, setRegistrationData] = useState({});
+  const [popUp, setPopUp] = useState(false);
+  var state = { regData: {}, status: false };
   //Fetching Training Data
   useEffect(() => {
     axios
-      .get("https://ui.taxcentre.id/api/calender/list.html?type_id=1")
+      .get("https://ui.taxcentre.id/backend/api/calender/list.html?type_id=1")
       .then((res) => {
+        console.log(res);
         const mapping = res.data.results
           .filter((data) => {
             return (
-              data.TypeID === "2" || data.TypeID === "3"
+              (data.TypeID === "2" && data?.regDate > today) ||
+              (data.TypeID === "3" && data?.regDate > today)
             ); /* data.TypeID === "3" && data?.RegDate > today */ //Webinar and Workshop
           })
           .map((data) => {
@@ -70,9 +82,8 @@ export default function RegisterForm() {
   };
   return (
     <>
-    
       <div id="training-form">
-      <ToastContainer className="participant-data-alert" autoClose={4000} />
+        <ToastContainer className="participant-data-alert" autoClose={4000} />
         <h1>Registration Form</h1>
         <div className="form-container">
           <div className="form-wrapper">
@@ -113,9 +124,9 @@ export default function RegisterForm() {
                 setFormData({ ...formData, address: e.target.value });
               }}
             ></input>
-            <span>NPWP</span>
+            <span> {formData.instansi_type === 15 ? "NIK" : "NPWP"}</span>
             <input
-              placeholder="NPWP"
+              placeholder={formData.instansi_type === 15 ? "NIK" : "NPWP"}
               type={"text"}
               onChange={(e) => {
                 setFormData({ ...formData, npwp: e.target.value });
@@ -173,7 +184,7 @@ export default function RegisterForm() {
               onChange={(e) => {
                 axios
                   .get(
-                    "https://ui.taxcentre.id/api/calender/list.html?type_id=1"
+                    "https://ui.taxcentre.id/backend/api/calender/list.html?type_id=1"
                   )
                   .then((res) => {
                     res.data.results
@@ -200,7 +211,6 @@ export default function RegisterForm() {
           </div>
         </div>
         <div className="participant-data-container" style={style}>
-          
           <h1>Participant Data</h1>
           <span>{"Nama Lengkap/Fullname"}</span>
           <input
@@ -235,9 +245,14 @@ export default function RegisterForm() {
                 type: "primary",
                 text: "Add Participant",
                 function: () => {
-                  const input =document.getElementsByClassName("data-container");
-                
-                  if (participantData.email!=="" && participantData.phone!=="" && participantData.name !=="") {
+                  const input =
+                    document.getElementsByClassName("data-container");
+
+                  if (
+                    participantData.email !== "" &&
+                    participantData.phone !== "" &&
+                    participantData.name !== ""
+                  ) {
                     setParticipant([...participant, participantData]);
                     toast.success(`Participant ${participantData.name} added`, {
                       hideProgressBar: false,
@@ -251,7 +266,7 @@ export default function RegisterForm() {
                       const element = input[index];
                       element.value = "";
                     }
-                    setParticipantData({name:"",email:"",phone:""});
+                    setParticipantData({ name: "", email: "", phone: "" });
                   } else {
                     toast.error(`Please fill all required field`, {
                       hideProgressBar: false,
@@ -267,12 +282,7 @@ export default function RegisterForm() {
             />
           </div>
         </div>
-        <div>
-          {/*Currnt Participant List */}
-          {/* {participant?.map(data=>{
-            return <p>{data.name}</p>
-          })} */}
-        </div>
+        <div></div>
         <div className="declaration">
           <h3>Pernyataan/Declaration</h3>
           <ol>
@@ -312,10 +322,24 @@ export default function RegisterForm() {
             type: "primary",
             text: "Submit",
             disable: agreed,
-            function: () => {
+            function: async () => {
+              async function participantPost(registerId) {
+                participant.forEach((data) => {
+                  const form = new FormData();
+                  form.append("registration_id", registerId);
+                  form.append("name", data.name);
+                  form.append("phone", data.phone);
+                  form.append("email", data.email);
+                  axios.post(
+                    "https://ui.taxcentre.id/backend/api/event/participant.html",
+                    form
+                  );
+                  /* Belum Masukkin Error Handler */
+                });
+                return { participantPost: { done: true, error: false } };
+              }
               if (participant.includes(participantData) === false)
                 setParticipant([...participant, participantData]);
-              let state = {};
               const form = new FormData();
               form.append("address", formData.address);
               form.append("calender_id", formData.calender_id);
@@ -327,27 +351,87 @@ export default function RegisterForm() {
               form.append("phone", formData.phone);
               form.append("designation", formData.designation);
               form.append("officer_name", formData.officer_name);
-              axios
-                .post("https://ui.taxcentre.id/api/event/register.html", form)
-                .then((res) => {
-                  console.log(res)
-                  state.regData = res.data;
-                  participant.forEach((data) => {
-                    const form = new FormData();
-                    form.append("registration_id",state.regData.register_id)
-                    form.append("name", data.name);
-                    form.append("phone", data.phone);
-                    form.append("email", data.email);
-                    axios
-                      .post(
-                        "https://ui.taxcentre.id/api/event/participant.html",
-                        form
-                      )
-                      .then((res) => {
-                        state.status = true;
-                        if (res.data.status)
-                          navigate(`/training/register/finish`, { state });
-                        else toast.error("Please fill all required field",{
+              const result = await axios.post(
+                "https://ui.taxcentre.id/backend/api/event/register.html",
+                form
+              );
+              if (result?.data.status === true) {
+                state.regData = result.data;
+                setRegistrationData(await result.data);
+                setOtpData((await result.data.token_id) + ""); //convert to string
+                const postData = await participantPost(result.data.register_id);
+                if (
+                  postData.participantPost.done === true &&
+                  postData.participantPost.error === false
+                ) {
+                  setPopUp(!popUp);
+                } else
+                  toast.error("Please fill all required field", {
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
+                  });
+              } else {
+                toast.error("Please fill all required field", {
+                  hideProgressBar: false,
+                  closeOnClick: false,
+                  pauseOnHover: true,
+                  draggable: false,
+                  progress: undefined,
+                  theme: "colored",
+                });
+              }
+            },
+          }}
+        />
+      </div>
+      {/* Pop UP Component */}
+
+      <div style={{ display: popUp ? "flex" : "none" }} id="OTP">
+        <div className="OTPContainer">
+          <h1>Enter Verification Code</h1>
+          {/*  <svg xmlns="http://www.w3.org/2000/svg" onClick={()=>{
+            setPopUp(!popUp)
+          }} viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg> */}
+          <OTPInput
+            inputStyle={{
+              border: "1px solid black",
+              width: "25%",
+              height: "50px",
+            }}
+            value={otp}
+            onChange={setOtp}
+            numInputs={4}
+            renderInput={(props) => <input {...props} />}
+          />
+          <span>We sent the Verification code to {formData.email}</span>
+          <Button
+            props={{
+              type: "primary",
+              text: "Confirm",
+              function: () => {
+                //if otp -> Otp input === otp data --> OTP Generated
+                if (otp === otpData) {
+                  const form = new FormData();
+                  form.append("status", "Approve");
+                  form.append("email", formData.email);
+                  form.append("token_id", otpData);
+                  form.append("calender_id", formData.calender_id);
+                  axios
+                    .post(
+                      `https://ui.taxcentre.id/backend/api/event/register-verify.html`,
+                      form
+                    )
+                    .then((res) => {
+                      state.status = true;
+                      state.regData = registrationData;
+                      if (res.data.status)
+                        navigate(`/training/register/finish`, { state });
+                      else
+                        toast.error("Confirmation Error", {
                           hideProgressBar: false,
                           closeOnClick: false,
                           pauseOnHover: true,
@@ -355,15 +439,20 @@ export default function RegisterForm() {
                           progress: undefined,
                           theme: "colored",
                         });
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
+                    });
+                } else
+                  toast.error("Wrong Code", {
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: true,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "colored",
                   });
-                });
-            },
-          }}
-        />
+              },
+            }}
+          />
+        </div>
       </div>
     </>
   );

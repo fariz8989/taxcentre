@@ -1,39 +1,51 @@
-import React, { useRef,useEffect,useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Button from "../Button/Button";
 import axios from "axios";
-export default function Survey(){
-    const [surveyData,setData]= useState(null);
+export default function Survey() {
+  const [surveyData, setData] = useState([]);
+  function getDate(date) {
+    var d = new Date(),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    return [year, month, day].join("-");
+  }
+  const today = getDate();
   useEffect(() => {
-    axios
-      .get("https://ui.taxcentre.id/api/questionnaire/list.html")
-      .then((res) => {
-        setData(res?.data.results)
-      });
-  }, []);
-    const slider = useRef();
-    let style = {
-        display:surveyData?.length !==0 ? "block":"none"
+    async function getSurvey(){
+      const surveyData = (await axios.get("https://ui.taxcentre.id/backend/api/questionnaire/list.html")).data.results;
+      surveyData.forEach(data=>{
+        if (data.EndDate > today && data.StatusID === "1")
+        setData([...surveyData, data]);
+      })
     }
-    return(<>
-     <div style={style} id="survey">
+    getSurvey();
+  }, []);
+  const slider = useRef();
+  let style = {
+    display: surveyData?.length !== 0 ? "block" : "none",
+  };
+  return (
+    <>
+      <div style={style} id="survey">
         <h1>Current Survey</h1>
         <div ref={slider} className="survey-container">
-          {surveyData?.map(data=>{
-            return(<>
-             <div className="survey-card">
-            <h3>{data.Title} </h3>
-            <Button props={{type:"primary", text:"Participate"}}/>
-          </div>
-            </>)
+          {surveyData?.map((data) => {
+            return (
+              <>
+                <div className="survey-card">
+                  <h3>{data.Title} </h3>
+                  <Button props={{ type: "primary", text: "Participate" }} />
+                </div>
+              </>
+            );
           })}
-         
-          
-          
-          
         </div>
         <button
-        className="survey-button"
-          onClick={() => slider.current.scrollLeft -= 500}
+          className="survey-button"
+          onClick={() => (slider.current.scrollLeft -= 500)}
           type="button"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -41,8 +53,8 @@ export default function Survey(){
           </svg>
         </button>
         <button
-        className="survey-button"
-          onClick={() => slider.current.scrollLeft += 500}
+          className="survey-button"
+          onClick={() => (slider.current.scrollLeft += 500)}
           type="button"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -50,5 +62,6 @@ export default function Survey(){
           </svg>
         </button>
       </div>
-    </>)
+    </>
+  );
 }

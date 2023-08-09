@@ -152,9 +152,9 @@ button:disabled {
 /* ACTIVITY */
 #activity {
   width: 100%;
-  height: 85vh;
+  height: fit-content;
   background-color: #cfd1d2;
-  padding: 36px 24px;
+  padding: 36px 8px;
   text-align: center;
   position: relative;
 }
@@ -177,31 +177,31 @@ button:disabled {
   transform: translateX(-50%);
 }
 #activity button:nth-child(3),
-#survey .survey-button:nth-child(3) {
+#survey .survey-button:nth-child(3), #latest-news-carousel button.left {
   position: absolute;
   transform: translateY(-50%);
   left: 2%;
   top: 50%;
 }
 #activity button:nth-child(4),
-#survey .survey-button:nth-child(4) {
+#survey .survey-button:nth-child(4),#latest-news-carousel button.news-slider-button.right {
   position: absolute;
   transform: translateY(-50%);
   right: 2%;
   top: 50%;
 }
 #activity button,
-.survey-button {
+.survey-button,#latest-news-carousel button.news-slider-button {
   display: none;
   background-color: var(--darkgray);
   transition: all 0.2s ease-in;
 }
-#activity button:hover {
+#activity button:hover,#latest-news-carousel button.news-slider-button:hover {
   background-color: var(--lightgray);
 }
 
 #activity button svg,
-#survey .survey-button svg {
+#survey .survey-button svg,#latest-news-carousel button.news-slider-button svg {
   fill: var(--yellow);
 }
 .activity-container {
@@ -238,13 +238,20 @@ button:disabled {
   left: 0;
   position: absolute;
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
   padding: 24px;
 }
 .activity-item h3 {
   font-family: "Roboto", sans-serif;
   color: var(--lightgray);
   font-size: 16px;
+}
+.activity-item span{
+  font-family: 'Roboto', sans-serif;
+  color: var(--lightgray);
+  font-size: 12px ;
 }
 /* Survey */
 #survey {
@@ -448,11 +455,13 @@ div.survey-card {
   max-width: 180px;
   opacity: 0.6;
   transition: all 0.25s ease-in;
+  aspect-ratio: 1/1;
 }
 .partner-wrapper img:hover {
   opacity: 1;
 }
 .news-homepage {
+  position: relative;
   display: flex;
   gap: 24px;
   padding: 24px 48px;
@@ -670,7 +679,7 @@ div.survey-card {
   transition: max-height 0.5s ease-in-out;
 }
 #training-display .open {
-  max-height: 232px;
+  max-height: 330px;
 }
 #training-display .button-open {
   transform: rotateX(180deg);
@@ -745,8 +754,84 @@ div.survey-card {
   top: 0px !important;
   right: 0 !important;
 }
+#registerFinish {
+  width: 100%;
+  height: 80vh;
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-finish-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.register-finish-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: "PT Sans", sans-serif;
+}
+.register-finish-container h1 {
+  font-size: 24px;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.register-finish-container .icon-success {
+  width: 180px;
+  fill: #25d366;
+}
+.register-finish-container .icon-fail {
+  width: 180px;
+  fill: crimson;
+}
 .declaration li {
   list-style: inside decimal;
+}
+#OTP{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(70, 89, 98, 0.407);
+  justify-content: center;
+  align-items: center;
+}
+.OTPContainer{
+  padding: 24px;
+  background-color: var(--white);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.OTPContainer h1{
+  font-family: 'Montserrat';
+  font-weight: bold;
+  margin: 12px 0;
+}
+.OTPContainer span{
+  color: var(--midgray);
+}
+.OTPContainer svg{
+  width: 25px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 8px;
+  cursor: pointer;
+  fill: var(--midgray);
+  transition: all .2s ease-in-out;
+}
+.OTPContainer svg:hover{
+  fill: var(--darkgray);
 }
 #login-form {
   width: 100%;
@@ -833,6 +918,9 @@ div.survey-card {
   bottom: -2px !important;
   left: 0;
 }
+#Loading.done::after{
+  display: none;
+}
 @keyframes loadingMovement {
   0% {
     left: 0;
@@ -878,6 +966,7 @@ div.survey-card {
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  min-height: 430px;
 }
 #publication .publication-card button {
   position: absolute;
@@ -906,6 +995,91 @@ div.survey-card {
 #publication .css-1oj2twp-MuiPagination-root {
   display: flex;
   justify-content: center;
+}
+/* Services */
+#services {
+  background-color: var(--white);
+  padding: 24px 36px;
+}
+#services .services-type-container {
+  width: 100%;
+  display: grid;
+  /*     justify-content: space-around; */
+  grid-template-columns: repeat(1, 1fr);
+}
+#services .services-type-container svg {
+  height: 120px;
+  fill: var(--yellow);
+}
+.services-type-container .services-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 36px 24px 12px;
+  position: relative;
+  height: fit-content;
+}
+.services-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.5s ease-in-out;
+}
+.services-dropdown span {
+  color: var(--midgray);
+  font-style: italic;
+}
+.services-dropdown.open {
+  max-height: 110px;
+}
+.services-type button {
+  transition: all 0.3s ease-out;
+  background-color: var(--yellow);
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid var(--yellow);
+  margin: unset;
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+}
+.services-type button svg {
+  transition: all 0.3s ease-in-out;
+}
+.services-type button svg.open {
+  transform: rotate(-180deg);
+}
+.services-type button:hover {
+  background-color: var(--white);
+}
+.services-type button:hover svg {
+  fill: var(--yellow) !important;
+}
+.services-type button svg {
+  fill: var(--white) !important;
+}
+.services-type .services-type-text {
+  margin: 24px;
+}
+.services-type .services-type-text h3 {
+  font-size: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: var(--darkgray);
+}
+.services-type-text span {
+  font-size: 18px;
+  font-family: "PT Sans", sans-serif;
+  color: var(--darkgray);
+}
+.services-dropdown span {
+  color: var(--midgray);
+  font-style: italic;
 }
 /* News Page */
 #news {
@@ -1006,6 +1180,9 @@ div.survey-card {
 .news-section-two {
   @apply bg-gray-800 p-4;
 }
+.news-section-two .carousel-item{
+  height: fit-content;
+}
 /* About Us Page */
 #vision-mission {
   width: 100%;
@@ -1033,7 +1210,7 @@ div.survey-card {
 }
 #vision-mission ol {
   list-style: inside decimal;
-  text-align: justify;
+  text-align: left;
   margin-top: 12px;
   font-family: "Roboto", sans-serif;
   font-size: 18px;
@@ -1177,6 +1354,9 @@ div.survey-card {
   align-items: center;
   background-color: #d9dbdb;
   position: relative;
+}
+.seminar-container h1#Loading{
+  font-size: 18px!important;
 }
 #news-display h1#Loading{
   left: unset;
@@ -1534,22 +1714,27 @@ div.survey-card {
     height: 240px;
   }
   .news-homepage {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
     padding: 24px 48px;
     height: 70vh;
     overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  .news-homepage .grid-item{ 
+    min-width: 300px;
+    
   }
   .survey-card h3 {
     margin-bottom: unset;
+  }
+  #activity{
+    padding: 36px 24px;
   }
   #activity h1 {
     font-weight: 700;
     font-size: 48px;
   }
   #activity button,
-  #survey .survey-button {
+  #survey .survey-button, #latest-news-carousel button.news-slider-button {
     width: 64px;
     height: 64px;
     padding: 16px;
@@ -1588,6 +1773,9 @@ div.survey-card {
   }
   #seminar h1 {
     font-size: 48px;
+  }
+  .seminar-container h1#Loading{
+    font-size: 36px!important;
   }
   #seminar .seminar-container {
     grid-template-columns: repeat(4, 1fr);
@@ -1644,89 +1832,9 @@ div.survey-card {
   .news-section-one {
     flex-direction: row;
   }
-  #services {
-    background-color: var(--white);
-    padding: 24px 36px;
-  }
+  /* Services */
   #services .services-type-container {
-    width: 100%;
-    display: grid;
-    /*     justify-content: space-around; */
     grid-template-columns: repeat(2, 1fr);
-  }
-  #services .services-type-container svg {
-    height: 120px;
-    fill: var(--yellow);
-  }
-  .services-type-container .services-type {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 36px 24px 12px;
-    position: relative;
-    height: fit-content;
-  }
-  .services-dropdown {
-    max-height: 0;
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.5s ease-in-out;
-  }
-  .services-dropdown span {
-    color: var(--midgray);
-    font-style: italic;
-  }
-  .services-dropdown.open {
-    max-height: 110px;
-  }
-  .services-type button {
-    transition: all 0.3s ease-out;
-    background-color: var(--yellow);
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    border: 1px solid var(--yellow);
-    margin: unset;
-    padding: 6px;
-    height: 30px;
-    width: 30px;
-  }
-  .services-type button svg {
-    transition: all 0.3s ease-in-out;
-  }
-  .services-type button svg.open {
-    transform: rotate(-180deg);
-  }
-  .services-type button:hover {
-    background-color: var(--white);
-  }
-  .services-type button:hover svg {
-    fill: var(--yellow) !important;
-  }
-  .services-type button svg {
-    fill: var(--white) !important;
-  }
-  .services-type .services-type-text {
-    margin: 24px;
-  }
-  .services-type .services-type-text h3 {
-    font-size: 24px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: bold;
-    color: var(--darkgray);
-  }
-  .services-type-text span {
-    font-size: 18px;
-    font-family: "PT Sans", sans-serif;
-    color: var(--darkgray);
-  }
-  .services-dropdown span {
-    color: var(--midgray);
-    font-style: italic;
   }
   #news .news-wrapper {
     width: 70%;
@@ -1837,7 +1945,7 @@ div.survey-card {
     transition: max-height 0.5s ease-in-out;
   }
   #training-display .open {
-    max-height: 250px;
+    max-height: 320px;
   }
   #training-display .button-open {
     transform: rotateX(180deg);

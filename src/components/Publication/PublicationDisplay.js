@@ -5,7 +5,6 @@ import axios from "axios";
 import { date } from "../../helper/dateParser";
 export default function PublicationDisplay() {
   const [news, setNews] = useState({ data: null, done: false, error: false });
-  console.log(news)
   const { id } = useParams();
   /* Parse HTML To String */
   const domParser = () => {
@@ -20,7 +19,7 @@ export default function PublicationDisplay() {
   };
   useEffect(() => {
     axios
-      .get("https://ui.taxcentre.id/api/news/list.html?cat_id=2")
+      .get("https://ui.taxcentre.id/backend/api/news/list.html?cat_id=2")
       .then((res) => {
         const filtered = res.data.results.map((data) => {
           if (data.ID === id) return data;
@@ -32,7 +31,9 @@ export default function PublicationDisplay() {
       });
   }, []);
   return (
+    
     <>
+      {news.done === true && news.error === false ? 
       <div id="news-display">
         <div className="news-wrapper">
           <div>
@@ -70,7 +71,7 @@ export default function PublicationDisplay() {
           </div>
           {/* END SHARE */}
         </div>
-      </div>
+      </div>:<h1 id="Loading">Loading</h1>}
     </>
   );
 }
